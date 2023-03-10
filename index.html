@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Author" content="Cauê Coser">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto JS - Intermediário</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scrip.js" defer></script>
+</head>
+
+<body>
+    <div id="totalBackground">
+        <header id="navBackground">
+            <nav id="navBar">
+                <div id="navLinks">
+                    <a href="#" id="linkDespesas">Despesas</a>
+                    <p>|</p>
+                    <a href="#" id="linkCategorias">Categorias</a>
+                </div>
+            </nav>
+            <div id="complementoNavBar"></div>
+        </header>
+
+        <main id="homeMain">
+            <section id="resumoDespesas">
+                <div class="resumoValores" id="resumoPagas">
+                    <h2 class="tituloResumo">TOTAL PAGO</h2>
+                    <h1 class="valorResumoPagas">VALOR PAGAS</h1>
+                </div>
+                <div class="resumoValores" id="resumoAPagar">
+                    <h2 class="tituloResumo">TOTAL A PAGAR</h2>
+                    <h1 class="valorResumoAPagar">VALOR A PAGAR</h1>
+                </div>
+                <div class="resumoValores" id="resumoAtrasadas">
+                    <h2 class="tituloResumo">ATRASADAS</h2>
+                    <h1 class="valorResumoAtrasadas">QTD ATRASADAS</h1>
+                </div>
+            </section>
+            <section id="recursosDespesas">
+                <form id="filtroDespesas">
+                    <div id="textoFormFiltro">
+                        <legend>Filtrar</legend>
+                        <input id="textoPesquisa" type="text">
+                    </div>
+                    <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
+                </form>
+                <table id="tabelaDespesas">
+                    <thead>
+                        <tr>
+                            <th>Data de Vencimento |</th>
+                            <th>Despesa |</th>
+                            <th>Valor |</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaDespesas">
+                        <tr>
+                            <td>23/03/2023</td>
+                            <td>Compra de lanche</td>
+                            <td>R$ 50, 00</td>
+                            <td>PAGO</td>
+                        </tr>
+                        <tr>
+                            <td>25/03/2023</td>
+                            <td>Conta de luz</td>
+                            <td>R$ 100, 00</td>
+                            <td>PENDENTE</td>
+                        </tr>
+                        <tr>
+                            <td>21/01/2023</td>
+                            <td>Cartão de crédito</td>
+                            <td>R$ 100, 00</td>
+                            <td>PENDENTE</td>
+                        </tr>
+                        <tr>
+                            <td>10/02/2023</td>
+                            <td>Casa</td>
+                            <td>R$ 50, 00</td>
+                            <td>PAGO</td>
+                        </tr>
+                        <tr>
+                            <td>1010232326</td>
+                            <td>Combustível</td>
+                            <td>R$ 50, 00</td>
+                            <td>PENDENTE</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR DESPESA">
+            </section>
+        </main>
+
+    </div>
+</body>
+
+</html>

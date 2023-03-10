@@ -4,11 +4,18 @@
 :root {
     --fst-font-color: #000;
     --sec-font-color: #FFF;
-
-    --fst-theme-color: #0E8;
+    --pos-font-color: #090;
+    --neg-font-color: #D00;
+    --att-font-color: #FC0;    
+    
+    --fst-theme-color: #0C8;
     --sec-theme-color: #EEE;
+    --trd-theme-color: #AAA;
+
+    --button-bg-color: #29F;     
+    
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 body {
@@ -35,7 +42,7 @@ position: relative;
 } */
 
 #navBar {
-    position: absolute;
+    /* position: absolute; */
     width: 100vw;
     height: 60px;
     display: flex;
@@ -55,7 +62,126 @@ position: relative;
 #complementoNavBar {
     width: 100vw;
     height: 34px;
-    position: absolute;
+    /* position: absolute; */
     top: 60px;
     background-color: var(--sec-theme-color);
+}
+
+#homeMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#resumoDespesas {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.resumoValores {
+    width: 300px;
+    text-align: center;
+    border: solid 2px var(--sec-theme-color);
+    border-top: none;
+    border-bottom: solid 3px;
+    margin-top: 50px;
+}
+
+#resumoPagas {
+    border-bottom-color: var(--pos-font-color);
+}
+
+#resumoAPagar {
+    border-bottom-color: var(--neg-font-color);
+}
+
+#resumoAtrasadas {
+    border-bottom-color: var(--att-font-color);
+}
+
+.tituloResumo {
+    font-weight: bold;
+}
+
+.valorResumoPagas {
+    color: var(--pos-font-color);
+}
+
+.valorResumoAPagar {
+    color: var(--neg-font-color);
+}
+
+.valorResumoAtrasadas {
+    color: var(--att-font-color);
+}
+
+#recursosDespesas {
+    width: 60%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+}
+
+#filtroDespesas {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+legend {
+    font-size: 0.65em;
+}
+
+#textoFormFiltro {
+    width: 85%;
+}
+
+#textoPesquisa {
+    width: 100%;
+    border: none;
+    border-bottom: solid 1px var(--trd-theme-color);
+    outline: none;
+    /* font-size: 0.8em; */
+}
+
+.botao {
+    width: fit-content;
+    height: 2.5em;
+    background-color: var(--button-bg-color);
+    color: var(--sec-font-color);
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8em;
+    padding: 2px 6px 0px;
+    box-shadow: 2px 2px 2px var(--trd-theme-color);
+}
+
+#tabelaDespesas {
+    width: 100%;
+}
+
+#tabelaDespesas > thead > tr {
+    width: 100%;
+    background-color: var(--sec-theme-color);
+}
+
+#tabelaDespesas th,
+#tabelaDespesas td {
+    padding: 14px;
+    border-bottom: solid 1px var(--trd-theme-color);
+    text-align: left;
+}
+
+/* #tabelaDespesas > thead > tr > th {
+    display: flex;
+    flex-direction: colums;
+} */
+
+#botaoAdicionarDespesa {
+    /* align-self: right;s */
 }
