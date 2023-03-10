@@ -20,7 +20,7 @@
 
 body {
     margin: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 a:visited {
@@ -161,6 +161,13 @@ legend {
     box-shadow: 2px 2px 2px var(--trd-theme-color);
 }
 
+#areaDespesas {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 20px;
+}
+
 #tabelaDespesas {
     width: 100%;
 }
@@ -177,11 +184,16 @@ legend {
     text-align: left;
 }
 
-/* #tabelaDespesas > thead > tr > th {
-    display: flex;
-    flex-direction: colums;
-} */
+#tabelaDespesas th {
+    border-right: solid 1px;
+    border-style: ridge;
+    width: 25%;
+}
 
-#botaoAdicionarDespesa {
-    /* align-self: right;s */
+.btnPago {
+    background-color: var(--pos-font-color);
+}
+
+.btnPendente {
+    background-color: var(--neg-font-color);
 }

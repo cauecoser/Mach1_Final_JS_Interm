@@ -47,49 +47,51 @@
                     </div>
                     <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
                 </form>
-                <table id="tabelaDespesas">
-                    <thead>
-                        <tr>
-                            <th>Data de Vencimento |</th>
-                            <th>Despesa |</th>
-                            <th>Valor |</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="corpoTabelaDespesas">
-                        <tr>
-                            <td>23/03/2023</td>
-                            <td>Compra de lanche</td>
-                            <td>R$ 50, 00</td>
-                            <td>PAGO</td>
-                        </tr>
-                        <tr>
-                            <td>25/03/2023</td>
-                            <td>Conta de luz</td>
-                            <td>R$ 100, 00</td>
-                            <td>PENDENTE</td>
-                        </tr>
-                        <tr>
-                            <td>21/01/2023</td>
-                            <td>Cartão de crédito</td>
-                            <td>R$ 100, 00</td>
-                            <td>PENDENTE</td>
-                        </tr>
-                        <tr>
-                            <td>10/02/2023</td>
-                            <td>Casa</td>
-                            <td>R$ 50, 00</td>
-                            <td>PAGO</td>
-                        </tr>
-                        <tr>
-                            <td>1010232326</td>
-                            <td>Combustível</td>
-                            <td>R$ 50, 00</td>
-                            <td>PENDENTE</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR DESPESA">
+                <div id="areaDespesas">
+                    <table id="tabelaDespesas">
+                        <thead>
+                            <tr>
+                                <th>Data de Vencimento</th>
+                                <th>Despesa</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabelaDespesas">
+                            <tr>
+                                <td>23/03/2023</td>
+                                <td>Compra de lanche</td>
+                                <td>R$ 50, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
+                            </tr>
+                            <tr>
+                                <td>25/03/2023</td>
+                                <td>Conta de luz</td>
+                                <td>R$ 100, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE"></td>
+                            </tr>
+                            <tr>
+                                <td>21/01/2023</td>
+                                <td>Cartão de crédito</td>
+                                <td>R$ 100, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE"></td>
+                            </tr>
+                            <tr>
+                                <td>10/02/2023</td>
+                                <td>Casa</td>
+                                <td>R$ 50, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
+                            </tr>
+                            <tr>
+                                <td>1010232326</td>
+                                <td>Combustível</td>
+                                <td>R$ 50, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR DESPESA">
+                </div>
             </section>
         </main>
 
