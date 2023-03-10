@@ -42,7 +42,10 @@ position: relative;
 } */
 
 #navBar {
-    /* position: absolute; */
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
     width: 100vw;
     height: 60px;
     display: flex;
@@ -60,14 +63,19 @@ position: relative;
 }
 
 #complementoNavBar {
+    z-index: 1;
+    position: fixed;
+    top: 60px;
+    right: 0;
     width: 100vw;
     height: 34px;
-    /* position: absolute; */
     top: 60px;
     background-color: var(--sec-theme-color);
 }
 
 #homeMain {
+    position: relative;
+    top: 94px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,7 +135,7 @@ position: relative;
 }
 
 #filtroDespesas {
-    width: 60%;
+    width: 75%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -184,6 +192,10 @@ legend {
     text-align: left;
 }
 
+#tabelaDespesas tr:nth-child(even) {
+    background-color: var(--4th-theme-color);
+}
+
 #tabelaDespesas th {
     border-right: solid 1px;
     border-style: ridge;
@@ -197,3 +209,4 @@ legend {
 .btnPendente {
     background-color: var(--neg-font-color);
 }
+
