@@ -22,8 +22,8 @@
         </nav>
         <div id="complementoNavBar"></div>
     </header>
-    
-    <div id="backgroundHome">
+
+    <div id="backgroundHome" class="">
         <main id="homeMain">
             <section id="resumoDespesas">
                 <div class="resumoValores" id="resumoPagas">
@@ -68,13 +68,15 @@
                                 <td>25/03/2023</td>
                                 <td>Conta de luz</td>
                                 <td>R$ 100, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE"></td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                </td>
                             </tr>
                             <tr>
                                 <td>21/01/2023</td>
                                 <td>Cartão de crédito</td>
                                 <td>R$ 100, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE"></td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                </td>
                             </tr>
                             <tr>
                                 <td>10/02/2023</td>
@@ -86,7 +88,8 @@
                                 <td>1010232326</td>
                                 <td>Combustível</td>
                                 <td>R$ 50, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE"></td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -96,6 +99,116 @@
         </main>
 
     </div>
+
+    <div id="backgroundAddDespesa" class="esconde">
+        <main id="addDespesasMain">
+            <section id="addDespesas" class="resumoValores">
+                <h2 class="tituloModal">ADICIONAR DESPESA</h2>
+
+                <form id="filtroDespesas">
+                    <div id="textoFormFiltro">
+                        <legend>Categoria</legend>
+                        <input id="textoPesquisa" type="text" placeholder="Busque a categoria...">
+                    </div>
+                </form>
+
+                <form id="filtroDespesas">
+                    <div id="textoFormFiltro">
+                        <legend>Data de Vencimento</legend>
+                        <input id="textoPesquisa" type="date">
+                    </div>
+                </form>
+
+                <form id="filtroDespesas">
+                    <div id="textoFormFiltro">
+                        <legend>Nome da Despesa</legend>
+                        <input id="textoPesquisa" type="text" placeholder="Despesa">
+                    </div>
+                </form>
+
+                <form id="filtroDespesas">
+                    <div id="textoFormFiltro">
+                        <legend>Valor</legend>
+                        <input id="textoPesquisa" type="number" placeholder="R$">
+                    </div>
+                </form>
+
+                <div id="botoesDespesas">
+                    <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
+                    <input id="botaoFiltrar" class="botao botaoCancel" type="button" value="CANCELAR">
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="backgroundCadastroCategorias" class="esconde">
+        <main id="cadCategoriasMain">
+            <section id="recursosDespesas">
+
+                <h2 class="tituloModal">CADASTRO DE CATEGORIAS</h2>
+
+                <form id="filtroDespesas">
+                    <div id="textoFormFiltro">
+                        <legend>Filtrar</legend>
+                        <input id="textoPesquisa" type="text">
+                    </div>
+                    <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
+                </form>
+                <div id="areaDespesas">
+                    <table id="tabelaDespesas">
+                        <thead>
+                            <tr>
+                                <th>Data de Vencimento</th>
+                                <th>Despesa</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabelaDespesas">
+                            <tr>
+                                <td>23/03/2023</td>
+                                <td>Compra de lanche</td>
+                                <td>R$ 50, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
+                            </tr>
+                            <tr>
+                                <td>25/03/2023</td>
+                                <td>Conta de luz</td>
+                                <td>R$ 100, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>21/01/2023</td>
+                                <td>Cartão de crédito</td>
+                                <td>R$ 100, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10/02/2023</td>
+                                <td>Casa</td>
+                                <td>R$ 50, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
+                            </tr>
+                            <tr>
+                                <td>1010232326</td>
+                                <td>Combustível</td>
+                                <td>R$ 50, 00</td>
+                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR DESPESA">
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer hidden>
+        <p>&copy; <em>IrOnDev</em> em parceria com <em>Mach1</em> - Pilotando para o futuro!</p>
+    </footer>
 </body>
 
 </html>

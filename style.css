@@ -6,14 +6,16 @@
     --sec-font-color: #FFF;
     --pos-font-color: #090;
     --neg-font-color: #D00;
-    --att-font-color: #FC0;    
-    
+    --att-font-color: #FC0;
+
     --fst-theme-color: #0C8;
     --sec-theme-color: #EEE;
     --trd-theme-color: #AAA;
 
-    --button-bg-color: #29F;     
-    
+    --button-bg-color: #29F;
+
+    --footer-bg-color: #ff6;
+
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
 }
@@ -35,11 +37,6 @@ a:link {
 a:hover {
     text-decoration: underline;
 }
-
-/* #totalBackground {
-    display: inline;
-position: relative;
-} */
 
 #navBar {
     z-index: 1;
@@ -91,24 +88,27 @@ position: relative;
 }
 
 .resumoValores {
-    width: 300px;
     text-align: center;
-    border: solid 2px var(--sec-theme-color);
+    border: none;
+    border-radius: 4%;
     border-top: none;
-    border-bottom: solid 3px;
     margin-top: 50px;
+    box-shadow: 0px 2px 2px #AAA ;
 }
 
 #resumoPagas {
-    border-bottom-color: var(--pos-font-color);
+    width: 32%;
+    border-bottom: solid 3px var(--pos-font-color);
 }
 
 #resumoAPagar {
-    border-bottom-color: var(--neg-font-color);
+    width: 32%;
+    border-bottom: solid 3px var(--neg-font-color);
 }
 
 #resumoAtrasadas {
-    border-bottom-color: var(--att-font-color);
+    width: 32%;
+    border-bottom: solid 3px var(--att-font-color);
 }
 
 .tituloResumo {
@@ -154,6 +154,8 @@ legend {
     border: none;
     border-bottom: solid 1px var(--trd-theme-color);
     outline: none;
+    font-size: 1em;
+    margin-top: 5px;
     /* font-size: 0.8em; */
 }
 
@@ -180,7 +182,7 @@ legend {
     width: 100%;
 }
 
-#tabelaDespesas > thead > tr {
+#tabelaDespesas>thead>tr {
     width: 100%;
     background-color: var(--sec-theme-color);
 }
@@ -210,3 +212,110 @@ legend {
     background-color: var(--neg-font-color);
 }
 
+#addDespesasMain, #cadCategoriasMain {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 50px;
+}
+
+#addDespesas {
+    width: 40%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tituloModal {
+    color: var(--button-bg-color);
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.botaoCancel {
+    font-weight: bold;
+    background-color: var(--sec-font-color);
+    border: solid 1px var(--neg-font-color);
+    color: var(--neg-font-color);
+}
+
+#botoesDespesas {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.esconde {
+    display: none;    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+em {
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    /* z-index: 1; */
+    background-color: var(--footer-bg-color);
+    color: var(--trd-theme-color);
+}
