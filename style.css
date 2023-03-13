@@ -66,34 +66,32 @@ a:hover {
     right: 0;
     width: 100vw;
     height: 34px;
-    top: 60px;
     background-color: var(--sec-theme-color);
 }
 
-#homeMain {
-    position: relative;
-    top: 94px;
+.mainSection {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-
+    align-items: center;
+    position: relative;
+    top: 100px;
 }
 
 #resumoDespesas {
     width: 70%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin: 50px 0;
 }
 
 .resumoValores {
-    text-align: center;
-    border: none;
     border-radius: 4%;
     border-top: none;
-    margin-top: 50px;
-    box-shadow: 0px 2px 2px #AAA ;
+    /* margin-top: 50px; */
+    text-align: center;
+    box-shadow: 0px 2px 2px var(--trd-theme-color) ;
 }
 
 #resumoPagas {
@@ -127,29 +125,33 @@ a:hover {
     color: var(--att-font-color);
 }
 
-#recursosDespesas {
+.recursos {
     width: 60%;
     display: flex;
     justify-content: left;
     flex-direction: column;
 }
 
-#filtroDespesas {
+.filtragem {
     width: 75%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
+#cadastroCategorias {
+    margin-top: 50px;
+}
+
 legend {
     font-size: 0.65em;
 }
 
-#textoFormFiltro {
+.textoFormFiltro {
     width: 85%;
 }
 
-#textoPesquisa {
+.textoPesquisa {
     width: 100%;
     border: none;
     border-bottom: solid 1px var(--trd-theme-color);
@@ -171,34 +173,38 @@ legend {
     box-shadow: 2px 2px 2px var(--trd-theme-color);
 }
 
-#areaDespesas {
+.areaTabela {
     display: flex;
     flex-direction: column;
     align-items: end;
     gap: 20px;
 }
 
-#tabelaDespesas {
+.tabela {
     width: 100%;
 }
 
-#tabelaDespesas>thead>tr {
+.tabela>thead>tr {
     width: 100%;
     background-color: var(--sec-theme-color);
 }
 
-#tabelaDespesas th,
-#tabelaDespesas td {
-    padding: 14px;
+.tabela th,
+.tabela td {
+    padding: 12px 4px;
     border-bottom: solid 1px var(--trd-theme-color);
     text-align: left;
 }
 
-#tabelaDespesas tr:nth-child(even) {
+.tituloHeadTabela {
+    border-right: solid 1px;
+}
+
+.tabela tr:nth-child(even) {
     background-color: var(--4th-theme-color);
 }
 
-#tabelaDespesas th {
+.tabela th {
     border-right: solid 1px;
     border-style: ridge;
     width: 25%;
@@ -212,22 +218,14 @@ legend {
     background-color: var(--neg-font-color);
 }
 
-#addDespesasMain, #cadCategoriasMain {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 50px;
-}
-
-#addDespesas {
+.add {
     width: 40%;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    top: 100px
 }
 
 .tituloModal {
@@ -245,7 +243,7 @@ legend {
     color: var(--neg-font-color);
 }
 
-#botoesDespesas {
+.salvarOuCancelar {
     width: 30%;
     display: flex;
     justify-content: space-between;
@@ -261,7 +259,10 @@ input[type=number]::-webkit-outer-spin-button {
     display: none;    
 }
 
-
+.espacoBotoes {
+    gap: 40%;
+    margin-bottom: 0;
+}
 
 
 

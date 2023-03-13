@@ -23,8 +23,8 @@
         <div id="complementoNavBar"></div>
     </header>
 
-    <div id="backgroundHome" class="">
-        <main id="homeMain">
+    <div id="home" class="">
+        <main class="mainSection">
             <section id="resumoDespesas">
                 <div class="resumoValores" id="resumoPagas">
                     <h2 class="tituloResumo">TOTAL PAGO</h2>
@@ -39,21 +39,21 @@
                     <h1 class="valorResumoAtrasadas">QTD ATRASADAS</h1>
                 </div>
             </section>
-            <section id="recursosDespesas">
-                <form id="filtroDespesas">
-                    <div id="textoFormFiltro">
+            <section class="recursos">
+                <form class="filtragem">
+                    <div class="textoFormFiltro">
                         <legend>Filtrar</legend>
-                        <input id="textoPesquisa" type="text">
+                        <input class="textoPesquisa" type="text">
                     </div>
                     <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
                 </form>
-                <div id="areaDespesas">
-                    <table id="tabelaDespesas">
+                <div class="areaTabela">
+                    <table class="tabela">
                         <thead>
                             <tr>
-                                <th>Data de Vencimento</th>
-                                <th>Despesa</th>
-                                <th>Valor</th>
+                                <th><p class="tituloHeadTabela">Data de Vencimento</p></th>
+                                <th><p class="tituloHeadTabela">Despesa</p></th>
+                                <th><p class="tituloHeadTabela">Valor</p></th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -100,115 +100,156 @@
 
     </div>
 
-    <div id="backgroundAddDespesa" class="esconde">
-        <main id="addDespesasMain">
-            <section id="addDespesas" class="resumoValores">
+    <div id="addDespesa" class="esconde">
+        <main class="mainSection">
+            <section class="add resumoValores">
                 <h2 class="tituloModal">ADICIONAR DESPESA</h2>
 
-                <form id="filtroDespesas">
-                    <div id="textoFormFiltro">
+                <form class="filtragem">
+                    <div class="textoFormFiltro">
                         <legend>Categoria</legend>
-                        <input id="textoPesquisa" type="text" placeholder="Busque a categoria...">
+                        <input class="textoPesquisa" type="text" placeholder="Busque a categoria...">
                     </div>
                 </form>
 
-                <form id="filtroDespesas">
-                    <div id="textoFormFiltro">
+                <form class="filtragem">
+                    <div class="textoFormFiltro">
                         <legend>Data de Vencimento</legend>
-                        <input id="textoPesquisa" type="date">
+                        <input class="textoPesquisa" type="date">
                     </div>
                 </form>
 
-                <form id="filtroDespesas">
-                    <div id="textoFormFiltro">
+                <form class="filtragem">
+                    <div class="textoFormFiltro">
                         <legend>Nome da Despesa</legend>
-                        <input id="textoPesquisa" type="text" placeholder="Despesa">
+                        <input class="textoPesquisa" type="text" placeholder="Despesa">
                     </div>
                 </form>
 
-                <form id="filtroDespesas">
-                    <div id="textoFormFiltro">
+                <form class="filtragem">
+                    <div class="textoFormFiltro">
                         <legend>Valor</legend>
-                        <input id="textoPesquisa" type="number" placeholder="R$">
+                        <input class="textoPesquisa" type="number" placeholder="R$">
                     </div>
                 </form>
 
-                <div id="botoesDespesas">
-                    <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
-                    <input id="botaoFiltrar" class="botao botaoCancel" type="button" value="CANCELAR">
+                <div class="salvarOuCancelar">
+                    <input id="" class="botao" type="button" value="SALVAR">
+                    <input id="" class="botao botaoCancel" type="button" value="CANCELAR">
                 </div>
             </section>
         </main>
     </div>
 
-    <div id="backgroundCadastroCategorias" class="esconde">
-        <main id="cadCategoriasMain">
-            <section id="recursosDespesas">
+    <div id="cadCategorias" class="esconde">
+        <main class="mainSection">
+            <section id="cadastroCategorias" class="recursos">
 
                 <h2 class="tituloModal">CADASTRO DE CATEGORIAS</h2>
 
-                <form id="filtroDespesas">
-                    <div id="textoFormFiltro">
+                <form class="filtragem">
+                    <div class="textoFormFiltro">
                         <legend>Filtrar</legend>
-                        <input id="textoPesquisa" type="text">
+                        <input class="textoPesquisa" type="text">
                     </div>
                     <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
                 </form>
-                <div id="areaDespesas">
-                    <table id="tabelaDespesas">
+                <div class="areaTabela">
+                    <table class="tabela">
                         <thead>
                             <tr>
-                                <th>Data de Vencimento</th>
-                                <th>Despesa</th>
-                                <th>Valor</th>
-                                <th>Status</th>
+                                <th><p class="tituloHeadTabela">ID</p></th>
+                                <th><p class="tituloHeadTabela">Categoria</p></th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="corpoTabelaDespesas">
+                        <tbody id="corpoTabelaCategorias">
                             <tr>
-                                <td>23/03/2023</td>
-                                <td>Compra de lanche</td>
-                                <td>R$ 50, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
-                            </tr>
-                            <tr>
-                                <td>25/03/2023</td>
-                                <td>Conta de luz</td>
-                                <td>R$ 100, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                <td>1010232322</td>
+                                <td>Gerais</td>
+                                <td>
+                                    <div class="salvarOuCancelar espacoBotoes">
+                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
+                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
+                                            value="EXCLUIR">
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>21/01/2023</td>
-                                <td>Cartão de crédito</td>
-                                <td>R$ 100, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                <td>1010232323</td>
+                                <td>Viagem</td>
+                                <td>
+                                    <div class="salvarOuCancelar espacoBotoes">
+                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
+                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
+                                            value="EXCLUIR">
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>10/02/2023</td>
-                                <td>Casa</td>
-                                <td>R$ 50, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
+                                <td>1010232324</td>
+                                <td>Mercado</td>
+                                <td>
+                                    <div class="salvarOuCancelar espacoBotoes">
+                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
+                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
+                                            value="EXCLUIR">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1010232325</td>
+                                <td>Jogos</td>
+                                <td>
+                                    <div class="salvarOuCancelar espacoBotoes">
+                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
+                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
+                                            value="EXCLUIR">
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>1010232326</td>
-                                <td>Combustível</td>
-                                <td>R$ 50, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
+                                <td>Padaria</td>
+                                <td>
+                                    <div class="salvarOuCancelar espacoBotoes">
+                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
+                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
+                                            value="EXCLUIR">
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR DESPESA">
+                    <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR CATEGORIA">
                 </div>
             </section>
         </main>
     </div>
-    
+
+    <div id="addEditCategoria" class="esconde">
+        <main class="mainSection">
+            <section class="add resumoValores">
+                <h2 class="tituloModal">ADICIONAR/EDITAR CATEGORIA</h2>
+
+                <form class="filtragem">
+                    <div class="textoFormFiltro">
+                        <legend>Categoria</legend>
+                        <input class="textoPesquisa" type="text" placeholder="Busque a categoria...">
+                    </div>
+
+                </form>
+                <div class="salvarOuCancelar">
+                    <input id="" class="botao" type="button" value="SALVAR">
+                    <input id="" class="botao botaoCancel" type="button" value="CANCELAR">
+                </div>
+            </section>
+        </main>
+    </div>
+
     <footer hidden>
         <p>&copy; <em>IrOnDev</em> em parceria com <em>Mach1</em> - Pilotando para o futuro!</p>
     </footer>
 </body>
 
-</html>
+</html> 
