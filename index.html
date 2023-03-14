@@ -8,7 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto JS - Intermediário</title>
     <link rel="stylesheet" href="style.css">
-    <script src="scrip.js" defer></script>
+    <script src="main.js" defer></script>
+    <script src="cadcategoria.js" defer></script>
+    <script src="addcategoria.js" defer></script>
+    
 </head>
 
 <body>
@@ -23,7 +26,7 @@
         <div id="complementoNavBar"></div>
     </header>
 
-    <div id="home" class="">
+    <div id="home" class="esconde">
         <main class="mainSection">
             <section id="resumoDespesas">
                 <div class="resumoValores" id="resumoPagas">
@@ -46,6 +49,7 @@
                         <input class="textoPesquisa" type="text">
                     </div>
                     <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
+                    <input class="botao botaoAdicionar" type="button" value="+ DESPESA">
                 </form>
                 <div class="areaTabela">
                     <table class="tabela">
@@ -58,42 +62,9 @@
                             </tr>
                         </thead>
                         <tbody id="corpoTabelaDespesas">
-                            <tr>
-                                <td>23/03/2023</td>
-                                <td>Compra de lanche</td>
-                                <td>R$ 50, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
-                            </tr>
-                            <tr>
-                                <td>25/03/2023</td>
-                                <td>Conta de luz</td>
-                                <td>R$ 100, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>21/01/2023</td>
-                                <td>Cartão de crédito</td>
-                                <td>R$ 100, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>10/02/2023</td>
-                                <td>Casa</td>
-                                <td>R$ 50, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPago" type="button" value="PAGO"></td>
-                            </tr>
-                            <tr>
-                                <td>1010232326</td>
-                                <td>Combustível</td>
-                                <td>R$ 50, 00</td>
-                                <td><input id="botaoFiltrar" class="botao btnPendente" type="button" value="PENDENTE">
-                                </td>
-                            </tr>
+                          
                         </tbody>
                     </table>
-                    <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR DESPESA">
                 </div>
             </section>
         </main>
@@ -141,7 +112,7 @@
         </main>
     </div>
 
-    <div id="cadCategorias" class="esconde">
+    <div id="cadCategorias" class="">
         <main class="mainSection">
             <section id="cadastroCategorias" class="recursos">
 
@@ -221,7 +192,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <input id="botaoAdicionarDespesa" class="botao" type="button" value="ADICIONAR CATEGORIA">
+                    <input class="botao botaoAdicionar" type="button" value="ADICIONAR CATEGORIA">
                 </div>
             </section>
         </main>
