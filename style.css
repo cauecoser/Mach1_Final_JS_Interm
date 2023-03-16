@@ -16,15 +16,17 @@
 
     --footer-bg-color: #ff6;
 
+    --background-modal: #000000DD;
+
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
 }
 
-body {
-    /* margin: 0; */
+/* body {
+    margin: 0;
     margin-bottom: 50px;
-    /* overflow: hidden; */
-}
+    overflow: hidden;
+} */
 
 a:visited {
     color: var(--sec-font-color)
@@ -53,7 +55,7 @@ a:hover {
 }
 
 #navLinks {
-    width: 300px;
+    width: 30%;
     display: flex;
     justify-content: space-evenly;
     color: var(--sec-font-color);
@@ -61,23 +63,23 @@ a:hover {
 
 
 #complementoNavBar {
-    z-index: 1;
+    width: 100vw;
+    height: 24px;
     position: fixed;
     top: 60px;
-    right: 0;
-    width: 100vw;
-    height: 34px;
     background-color: var(--sec-theme-color);
+    z-index: 1;
 }
 
 .mainSection {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    position: relative;
-    top: 100px;
+    position: fixed;
+    overflow: auto;
+    top: 84px;
 }
 
 #resumoDespesas {
@@ -88,7 +90,7 @@ a:hover {
 }
 
 .resumoValores {
-    border-radius: 4%;
+    border-radius: 4px;
     border-top: none;
     /* margin-top: 50px; */
     text-align: center;
@@ -114,15 +116,15 @@ a:hover {
     font-weight: bold;
 }
 
-.valorResumoPagas {
+#valorResumoPagas {
     color: var(--pos-font-color);
 }
 
-.valorResumoAPagar {
+#valorResumoAPagar {
     color: var(--neg-font-color);
 }
 
-.valorResumoAtrasadas {
+#valorResumoAtrasadas {
     color: var(--att-font-color);
 }
 
@@ -170,7 +172,7 @@ legend {
     border-radius: 4px;
     font-size: 0.8em;
     padding: 2px 6px 0px;
-    box-shadow: 2px 2px 2px var(--trd-theme-color);
+    box-shadow: 2px 2px var(--trd-theme-color);
 }
 
 .botaoAdicionar {
@@ -232,7 +234,10 @@ legend {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    top: 100px
+    /* top: -100px; */
+    background-color: var(--sec-font-color);
+    padding: 30px;
+    z-index: 1;
 }
 
 .tituloModal {
@@ -271,9 +276,26 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 0;
 }
 
+#addEditCategoria {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background-modal);
+    /* z-index: 0; */
+}
 
+#sectionAddEditCategorias {
+    position: fixed;
+    top: 200px;
+}
 
+.linhaVerde {
+    color: var(--pos-font-color);
+}
 
+.linhaVermelha {
+    color: var(--neg-font-color);
+}
 
 
 

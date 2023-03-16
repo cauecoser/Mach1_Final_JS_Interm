@@ -8,9 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto JS - Intermediário</title>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
-    <script src="cadcategoria.js" defer></script>
-    <script src="addcategoria.js" defer></script>
+    <script src="despesas.js" defer></script>
+    <script src="categorias.js" defer></script>
     
 </head>
 
@@ -25,21 +24,21 @@
         </nav>
         <div id="complementoNavBar"></div>
     </header>
-
-    <div id="home" class="esconde">
+    
+    <div id="home" class="">
         <main class="mainSection">
             <section id="resumoDespesas">
                 <div class="resumoValores" id="resumoPagas">
                     <h2 class="tituloResumo">TOTAL PAGO</h2>
-                    <h1 class="valorResumoPagas">VALOR PAGAS</h1>
+                    <h1 id="valorResumoPagas">VALOR PAGAS</h1>
                 </div>
                 <div class="resumoValores" id="resumoAPagar">
                     <h2 class="tituloResumo">TOTAL A PAGAR</h2>
-                    <h1 class="valorResumoAPagar">VALOR A PAGAR</h1>
+                    <h1 id="valorResumoAPagar">VALOR A PAGAR</h1>
                 </div>
                 <div class="resumoValores" id="resumoAtrasadas">
                     <h2 class="tituloResumo">ATRASADAS</h2>
-                    <h1 class="valorResumoAtrasadas">QTD ATRASADAS</h1>
+                    <h1 id="valorResumoAtrasadas">QTD ATRASADAS</h1>
                 </div>
             </section>
             <section class="recursos">
@@ -112,7 +111,7 @@
         </main>
     </div>
 
-    <div id="cadCategorias" class="">
+    <div id="cadCategorias" class="esconde">
         <main class="mainSection">
             <section id="cadastroCategorias" class="recursos">
 
@@ -121,9 +120,9 @@
                 <form class="filtragem">
                     <div class="textoFormFiltro">
                         <legend>Filtrar</legend>
-                        <input class="textoPesquisa" type="text">
+                        <input id="filtroCategoria" class="textoPesquisa" type="text">
                     </div>
-                    <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
+                    <!-- <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR"> -->
                 </form>
                 <div class="areaTabela">
                     <table class="tabela">
@@ -135,7 +134,7 @@
                             </tr>
                         </thead>
                         <tbody id="corpoTabelaCategorias">
-                            <tr>
+                            <!-- <tr>
                                 <td>1010232322</td>
                                 <td>Gerais</td>
                                 <td>
@@ -189,10 +188,10 @@
                                             value="EXCLUIR">
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
-                    <input class="botao botaoAdicionar" type="button" value="ADICIONAR CATEGORIA">
+                    <input id="botaoAddCategoria" class="botao botaoAdicionar" type="button" value="+ CATEGORIA">
                 </div>
             </section>
         </main>
@@ -200,24 +199,24 @@
 
     <div id="addEditCategoria" class="esconde">
         <main class="mainSection">
-            <section class="add resumoValores">
+            <section id="sectionAddEditCategorias" class="add resumoValores">
                 <h2 class="tituloModal">ADICIONAR/EDITAR CATEGORIA</h2>
 
                 <form class="filtragem">
                     <div class="textoFormFiltro">
                         <legend>Categoria</legend>
-                        <input class="textoPesquisa" type="text" placeholder="Busque a categoria...">
+                        <input id="nomeCategoria" class="textoPesquisa" type="text" placeholder="Busque a categoria...">
                     </div>
 
                 </form>
                 <div class="salvarOuCancelar">
-                    <input id="" class="botao" type="button" value="SALVAR">
-                    <input id="" class="botao botaoCancel" type="button" value="CANCELAR">
+                    <input id="botaoSalvarCategoria" class="botao" type="button" value="SALVAR">
+                    <input id="botaoCancelAddCategoria" class="botao botaoCancel" type="button" value="CANCELAR">
                 </div>
             </section>
         </main>
     </div>
-
+    
     <footer hidden>
         <p>&copy; <em>IrOnDev</em> em parceria com <em>Mach1</em> - Pilotando para o futuro!</p>
     </footer>
