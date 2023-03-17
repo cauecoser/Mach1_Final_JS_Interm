@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="despesas.js" defer></script>
     <script src="categorias.js" defer></script>
-    
+
 </head>
 
 <body>
@@ -24,21 +24,21 @@
         </nav>
         <div id="complementoNavBar"></div>
     </header>
-    
+
     <div id="home" class="">
         <main class="mainSection">
             <section id="resumoDespesas">
                 <div class="resumoValores" id="resumoPagas">
                     <h2 class="tituloResumo">TOTAL PAGO</h2>
-                    <h1 id="valorResumoPagas">VALOR PAGAS</h1>
+                    <h1 id="valorResumoPagas"></h1>
                 </div>
                 <div class="resumoValores" id="resumoAPagar">
                     <h2 class="tituloResumo">TOTAL A PAGAR</h2>
-                    <h1 id="valorResumoAPagar">VALOR A PAGAR</h1>
+                    <h1 id="valorResumoAPagar"></h1>
                 </div>
                 <div class="resumoValores" id="resumoAtrasadas">
                     <h2 class="tituloResumo">ATRASADAS</h2>
-                    <h1 id="valorResumoAtrasadas">QTD ATRASADAS</h1>
+                    <h1 id="valorResumoAtrasadas"></h1>
                 </div>
             </section>
             <section class="recursos">
@@ -48,20 +48,26 @@
                         <input class="textoPesquisa" type="text">
                     </div>
                     <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR">
-                    <input class="botao botaoAdicionar" type="button" value="+ DESPESA">
+                    <input id="botaoAdicionarDespesa" class="botao botaoAdicionar" type="button" value="+ DESPESA">
                 </form>
                 <div class="areaTabela">
                     <table class="tabela">
                         <thead>
                             <tr>
-                                <th><p class="tituloHeadTabela">Data de Vencimento</p></th>
-                                <th><p class="tituloHeadTabela">Despesa</p></th>
-                                <th><p class="tituloHeadTabela">Valor</p></th>
+                                <th>
+                                    <p class="tituloHeadTabela">Data de Vencimento</p>
+                                </th>
+                                <th>
+                                    <p class="tituloHeadTabela">Despesa</p>
+                                </th>
+                                <th>
+                                    <p class="tituloHeadTabela">Valor</p>
+                                </th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody id="corpoTabelaDespesas">
-                          
+
                         </tbody>
                     </table>
                 </div>
@@ -78,34 +84,36 @@
                 <form class="filtragem">
                     <div class="textoFormFiltro">
                         <legend>Categoria</legend>
-                        <input class="textoPesquisa" type="text" placeholder="Busque a categoria...">
+                        <input list="opcoesCategorias" id="textoOpcoesCategorias" placeholder="Selecione a categoria...">
+                        <datalist id="opcoesCategorias">
+                        </datalist>
                     </div>
                 </form>
 
                 <form class="filtragem">
                     <div class="textoFormFiltro">
                         <legend>Data de Vencimento</legend>
-                        <input class="textoPesquisa" type="date">
+                        <input id="dataVencimentoDespesa" class="textoPesquisa" type="date">
                     </div>
                 </form>
 
                 <form class="filtragem">
                     <div class="textoFormFiltro">
                         <legend>Nome da Despesa</legend>
-                        <input class="textoPesquisa" type="text" placeholder="Despesa">
+                        <input id="nomeDespesa" class="textoPesquisa" type="text" placeholder="Despesa">
                     </div>
                 </form>
 
                 <form class="filtragem">
                     <div class="textoFormFiltro">
                         <legend>Valor</legend>
-                        <input class="textoPesquisa" type="number" placeholder="R$">
+                        <input id="valorDespesa" class="textoPesquisa" type="number" placeholder="R$">
                     </div>
                 </form>
 
                 <div class="salvarOuCancelar">
-                    <input id="" class="botao" type="button" value="SALVAR">
-                    <input id="" class="botao botaoCancel" type="button" value="CANCELAR">
+                    <input id="botaoSalvarDespesa" class="botao" type="button" value="SALVAR">
+                    <input id="botaoCancelarDespesa" class="botao botaoCancel" type="button" value="CANCELAR">
                 </div>
             </section>
         </main>
@@ -128,8 +136,12 @@
                     <table class="tabela">
                         <thead>
                             <tr>
-                                <th><p class="tituloHeadTabela">ID</p></th>
-                                <th><p class="tituloHeadTabela">Categoria</p></th>
+                                <th>
+                                    <p class="tituloHeadTabela">ID</p>
+                                </th>
+                                <th>
+                                    <p class="tituloHeadTabela">Categoria</p>
+                                </th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -216,10 +228,10 @@
             </section>
         </main>
     </div>
-    
+
     <footer hidden>
         <p>&copy; <em>IrOnDev</em> em parceria com <em>Mach1</em> - Pilotando para o futuro!</p>
     </footer>
 </body>
 
-</html> 
+</html>

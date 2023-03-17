@@ -7,7 +7,6 @@ let botaoSalvarCategoria = document.querySelector('#botaoSalvarCategoria')
 let categorias = []
 let id = ''
 let linkCategorias = document.querySelector('#linkCategorias')
-let telaHome = document.querySelector('#home')
 let cadCtaegorias = document.querySelector('#cadCategorias')
 let filtroCategoria = document.querySelector('#filtroCategoria')
 
@@ -24,12 +23,13 @@ function defineID() {
     return `${ano}${mes}${dia}_${horas}${minutos}${segundos}`
 }
 
-function mostraModal() {
+function mostraModalCategoria() {
     addEditCategoria.classList.remove('esconde')
     nomeCategoria.value = ''
+    botaoSalvarCategoria.setAttribute("onclick", "addCategoria()")
 }
 
-function escondeModal() {
+function escondeModalCategoria() {
     addEditCategoria.classList.add('esconde')
 }
 
@@ -51,7 +51,7 @@ function listarCategorias(lista) {
     telaHome.classList.add('esconde')
 
     let listaCategorias = ''
-
+    console.log(lista.length)
     if (lista.length == 0) {
         listaCategorias = `
             <tr>
@@ -65,8 +65,9 @@ function listarCategorias(lista) {
                 <tr>
                     <td>${categoria.id}</td>
                     <td>${categoria.nome}</td>
-                    <td>
-                        AÇÕES
+                    <td id="botoesDeAcaoCat">
+                        <input class="botao" type="button" value="EDITAR" onclick="abreEdicaoCategoria('${categoria.id}')">
+                        <input class="botao botaoCancel" type="button" value="EXCLUIR" onclick="excluirCategoria('${categoria.id}')">
                     </td>                
                 </tr>
             `
@@ -80,11 +81,35 @@ function filtraCategorias() {
     listarCategorias(categoriasFiltradas)
 }
 
+function abreEdicaoCategoria(id) {
+    mostraModalCategoria()
+    nomeCategoria.value = categorias.find(obj => obj.id == id).nome
+    botaoSalvarCategoria.setAttribute('onclick', `editarCategoria('${id}')`)
+}
 
-botaoAddCategoria.addEventListener('click', mostraModal)
-botaoCancelAddCategoria.addEventListener('click', escondeModal)
-botaoSalvarCategoria.addEventListener('click', addCategoria)
-linkCategorias.addEventListener('click', listarCategorias)
+function editarCategoria(id) {
+    categorias.map(obj => {
+        if (obj.id == id) {
+            obj.nome = nomeCategoria.value
+        }
+    })
+    console.log(categorias)
+    escondeModalCategoria()
+    listarCategorias(categorias)
+}
+
+function excluirCategoria(id) {
+    if (confirm('Deseja realmente excluir a categoria?')) {
+        categorias.find((obj, index) => {
+            if(obj.id == id) {
+                categorias.splice(index,1)
+            }
+        })
+        listarCategorias(categorias)
+    }
+}
+
+botaoAddCategoria.addEventListener('click', () => mostraModalCategoria())
+botaoCancelAddCategoria.addEventListener('click', escondeModalCategoria)
+linkCategorias.addEventListener('click', () => listarCategorias(categorias))
 filtroCategoria.addEventListener('keyup', filtraCategorias)
-
-listarCategorias(categorias)

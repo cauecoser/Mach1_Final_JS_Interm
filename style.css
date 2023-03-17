@@ -297,7 +297,10 @@ input[type=number]::-webkit-outer-spin-button {
     color: var(--neg-font-color);
 }
 
-
+#botoesDeAcaoCat {
+    display: flex;
+    gap: 10%;
+}
 
 
 
