@@ -86,7 +86,7 @@ function listarCategorias(lista) {
 }
 
 function filtraCategorias() {
-    categoriasFiltradas = categorias.filter(cat => cat.nome.toLowerCase().includes(filtroCategoria.value.toLowerCase()))
+    let categoriasFiltradas = categorias.filter(cat => cat.nome.toLowerCase().includes(filtroCategoria.value.toLowerCase()))
     listarCategorias(categoriasFiltradas)
 }
 

@@ -18,8 +18,18 @@ let valorDespesa = document.querySelector('#valorDespesa')
 let telaHome = document.querySelector('#home')
 let opcoesCategorias = document.querySelector('#opcoesCategorias')
 let categoriaSelecionada = document.querySelector('#categoriaSelecionada')
-
 let totalAtrasadas = 0
+let filtroDespesa = document.querySelector('#filtroDespesa')
+function filtraDespesas() {
+    let despesasFiltradas = tabelaDespesas.filter(despesa => 
+        despesa.data.includes(filtroDespesa.value) ||
+        despesa.nome.toLowerCase().includes(filtroDespesa.value.toLowerCase()) ||
+        despesa.valor.includes(filtroDespesa.value) ||
+        despesa.categoria.toLowerCase().includes(filtroDespesa.value.toLowerCase()) ||
+        despesa.status.toLowerCase().includes(filtroDespesa.value.toLowerCase())
+    )
+    montarTabelaDespesas(despesasFiltradas)
+}
 
 function testaData(dataDespesaTabela) {
     let data = new Date()
@@ -137,5 +147,5 @@ linkDespesas.addEventListener('click', () => montarTabelaDespesas(tabelaDespesas
 botaoAdicionarDespesa.addEventListener('click', mostraModalDespesas)
 botaoCancelarDespesa.addEventListener('click', escondeModalDespesas)
 botaoSalvarDespesa.addEventListener('click', adicionarDespesa)
-
+filtroDespesa.addEventListener('keyup', filtraDespesas)
 montarTabelaDespesas(tabelaDespesas)
