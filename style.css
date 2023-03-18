@@ -216,7 +216,7 @@ legend {
 .tabela th {
     border-right: solid 1px;
     border-style: ridge;
-    width: 25%;
+    width: 20%;
 }
 
 .btnPago {
@@ -276,7 +276,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 0;
 }
 
-#addEditCategoria {
+#addEditCategoria, #addDespesa {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -302,7 +302,10 @@ input[type=number]::-webkit-outer-spin-button {
     gap: 10%;
 }
 
-
+.centralizar {
+    position: fixed;
+    top: 150px;
+}
 
 
 

@@ -1,37 +1,4 @@
 let tabelaDespesas = []
-// {
-//     vencimento: '23/03/2023',
-//     despesa: 'Compra de Lanche',
-//     valor: 50,
-//     status: "PAGO",
-// },
-
-// {
-//     vencimento: '25/03/2023',
-//     despesa: 'Conta de Luz',
-//     valor: 100,
-//     status: "PENDENTE",
-// },
-// {
-//     vencimento: '21/01/2023',
-//     despesa: 'Cartão de Crédito',
-//     valor: 100,
-//     status: "PENDENTE",
-// },
-// {
-//     vencimento: '10/02/2023',
-//     despesa: 'Casa',
-//     valor: 50,
-//     status: "PAGO",
-// },
-// {
-//     vencimento: '1010232326',
-//     despesa: 'Combustível',
-//     valor: 50,
-//     status: "PENDENTE",
-// }
-// ]
-
 let corpoTabelaDespesas = document.querySelector('#corpoTabelaDespesas')
 let stats = ''
 let corLinha = ''
@@ -41,7 +8,7 @@ let addDespesa = document.querySelector('#addDespesa')
 let botaoAdicionarDespesa = document.querySelector('#botaoAdicionarDespesa')
 let valorResumoAPagar = document.querySelector('#valorResumoAPagar')
 let valorResumoPagas = document.querySelector('#valorResumoPagas')
-let valorResumoAtrasadas = document.querySelector('#valorResumoPendentes')
+let valorResumoAtrasadas = document.querySelector('#valorResumoAtrasadas')
 let botaoSalvarDespesa = document.querySelector('#botaoSalvarDespesa')
 let botaoCancelarDespesa = document.querySelector('#botaoCancelarDespesa')
 let dadosData = []
@@ -49,17 +16,22 @@ let dataVencimentoDespesa = document.querySelector('#dataVencimentoDespesa')
 let nomeDespesa = document.querySelector('#nomeDespesa')
 let valorDespesa = document.querySelector('#valorDespesa')
 let telaHome = document.querySelector('#home')
+let opcoesCategorias = document.querySelector('#opcoesCategorias')
+let categoriaSelecionada = document.querySelector('#categoriaSelecionada')
 
-// function defineDadosData() {
-//     let data = new Date()
-//     let ano = data.getFullYear()
-//     let mes = (data.getMonth() + 1) < 10 ? `0${(data.getMonth() + 1)}` : (data.getMonth() + 1)
-//     let dia = data.getDate() < 10 ? `0${data.getDate()}` : data.getDate()
+let totalAtrasadas = 0
 
-//     return dadosData = [dia, mes, ano]    
-// }
+function testaData(dataDespesaTabela) {
+    let data = new Date()
+    let [anoDataTabela, mesDataTabela, diaDataTabela] = dataDespesaTabela.split('-')
+    let dataDespesa = new Date(anoDataTabela, (mesDataTabela - 1), diaDataTabela)
+
+    return data >= dataDespesa
+}
 
 function mostraModalDespesas() {
+    insereOptionsCategorias()
+
     telaHome.classList.add('esconde')
     addDespesa.classList.remove('esconde')
 }
@@ -71,6 +43,8 @@ function escondeModalDespesas() {
 
 function montarTabelaDespesas(lista) {
 
+    escondeModalDespesas()
+    addEditCategoria.classList.add('esconde')
     cadCategorias.classList.add('esconde')
     telaHome.classList.remove('esconde')
 
@@ -78,12 +52,10 @@ function montarTabelaDespesas(lista) {
     let totalPago = 0
     let totalAPagar = 0
 
-    // let totalAtrasadas = []
-
     if (lista.length == 0) {
         linhaDespesa = `
-            <tr>
-                <td colspan='4'>Não existe despesa a ser exibida.</td>          
+        <tr>
+                <td colspan='5'>Não existe despesa a ser exibida.</td>          
             </tr>
         `
     } else {
@@ -92,30 +64,32 @@ function montarTabelaDespesas(lista) {
             if (obj.status == "PAGO") {
                 stats = "btnPago"
                 corLinha = "linhaVerde"
-                totalPago += obj.valor
+                totalPago += Number(obj.valor)
             } else {
                 stats = "btnPendente"
                 corLinha = "linhaVermelha"
-                totalAPagar += obj.valor
-                // if (obj.data < new Date()) {
-                //     totalAtrasadas.push(obj)
-                //     valorResumoAtrasadas.innerHTML = totalAtrasadas.length
-                // }    
+                totalAPagar += Number(obj.valor)
             }
+            valorResumoAtrasadas.innerHTML = totalAtrasadas
 
             linhaDespesa += `
-            <tr>
-                <td class="${corLinha}">${obj.data}</td>
-                <td class="${corLinha}">${obj.nome}</td>
-                <td class="${corLinha}">${obj.valor}</td>
-                <td><input type="button" class="botao ${stats}" value=${obj.status} onclick="trocaStatus(${index})"></td>
+                <tr>
+                    <td class="${corLinha}">${obj.data}</td>
+                    <td class="${corLinha}">${obj.nome}</td>
+                    <td class="${corLinha}">${formataReal(obj.valor)}</td>
+                    <td class="${corLinha}">${obj.categoria}</td>
+                    <td><input type="button" class="botao ${stats}" value="${obj.status}" onclick="trocaStatus(${index})"></td>
                 </tr>
-                `
+            `
         })
     }
     corpoTabelaDespesas.innerHTML = linhaDespesa
-    valorResumoPagas.innerHTML = totalPago.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-    valorResumoAPagar.innerHTML = totalAPagar.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+    valorResumoPagas.innerHTML = formataReal(totalPago)
+    valorResumoAPagar.innerHTML = formataReal(totalAPagar)
+}
+
+function formataReal(campo) {
+    return Number(campo).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
 function trocaStatus(indice) {
@@ -123,13 +97,19 @@ function trocaStatus(indice) {
         if (indice == index) {
             if (obj.status == "PAGO") {
                 obj.status = "PENDENTE"
+
+                if (testaData(obj.data)) {
+                    totalAtrasadas++
+                }
             } else {
                 obj.status = "PAGO"
+                if (testaData(obj.data)) {
+                    totalAtrasadas--
+                }
             }
         }
     })
-    corpoTabelaDespesas.innerHTML = ''
-    montarTabelaDespesas()
+    montarTabelaDespesas(tabelaDespesas)
 }
 
 function adicionarDespesa() {
@@ -141,11 +121,15 @@ function adicionarDespesa() {
     despesa.data = dataVencimentoDespesa.value
     despesa.nome = nomeDespesa.value
     despesa.valor = valorDespesa.value
-    despesa.status = "PAGO"
+    despesa.categoria = categoriaSelecionada.value
+    despesa.status = "PENDENTE"
+
+    if (testaData(despesa.data)) {
+        totalAtrasadas++
+    }
 
     tabelaDespesas.push(despesa)
     montarTabelaDespesas(tabelaDespesas)
-    console.log(tabelaDespesas)
 }
 
 

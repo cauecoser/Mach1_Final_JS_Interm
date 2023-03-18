@@ -30,15 +30,15 @@
             <section id="resumoDespesas">
                 <div class="resumoValores" id="resumoPagas">
                     <h2 class="tituloResumo">TOTAL PAGO</h2>
-                    <h1 id="valorResumoPagas"></h1>
+                    <h1 id="valorResumoPagas">0</h1>
                 </div>
                 <div class="resumoValores" id="resumoAPagar">
                     <h2 class="tituloResumo">TOTAL A PAGAR</h2>
-                    <h1 id="valorResumoAPagar"></h1>
+                    <h1 id="valorResumoAPagar">0</h1>
                 </div>
                 <div class="resumoValores" id="resumoAtrasadas">
                     <h2 class="tituloResumo">ATRASADAS</h2>
-                    <h1 id="valorResumoAtrasadas"></h1>
+                    <h1 id="valorResumoAtrasadas">0</h1>
                 </div>
             </section>
             <section class="recursos">
@@ -63,6 +63,9 @@
                                 <th>
                                     <p class="tituloHeadTabela">Valor</p>
                                 </th>
+                                <th>
+                                    <p class="tituloHeadTabela">Categoria</p>
+                                </th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -78,13 +81,13 @@
 
     <div id="addDespesa" class="esconde">
         <main class="mainSection">
-            <section class="add resumoValores">
+            <section class="add resumoValores centralizar">
                 <h2 class="tituloModal">ADICIONAR DESPESA</h2>
 
                 <form class="filtragem">
                     <div class="textoFormFiltro">
                         <legend>Categoria</legend>
-                        <input list="opcoesCategorias" id="textoOpcoesCategorias" placeholder="Selecione a categoria...">
+                        <input list="opcoesCategorias" id="categoriaSelecionada" class="textoPesquisa" placeholder="Selecione a categoria...">
                         <datalist id="opcoesCategorias">
                         </datalist>
                     </div>
@@ -211,7 +214,7 @@
 
     <div id="addEditCategoria" class="esconde">
         <main class="mainSection">
-            <section id="sectionAddEditCategorias" class="add resumoValores">
+            <section id="sectionAddEditCategorias" class="add resumoValores centralizar">
                 <h2 class="tituloModal">ADICIONAR/EDITAR CATEGORIA</h2>
 
                 <form class="filtragem">

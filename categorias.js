@@ -1,4 +1,4 @@
-let corpoTabelaCategorias = document.querySelector('#corpoTabelaCategorias')
+// let corpoTabelaCategorias = document.querySelector('#corpoTabelaCategorias')
 let botaoAddCategoria = document.querySelector('#botaoAddCategoria')
 let addEditCategoria = document.querySelector('#addEditCategoria')
 let botaoAddCancelAddCategoria = document.querySelector('#botaoCancelAddCategoria')
@@ -10,6 +10,12 @@ let linkCategorias = document.querySelector('#linkCategorias')
 let cadCtaegorias = document.querySelector('#cadCategorias')
 let filtroCategoria = document.querySelector('#filtroCategoria')
 
+
+function insereOptionsCategorias() {
+    let options = ''
+    categorias.forEach(obj => options += `<option>${obj.nome}</option>`)
+    opcoesCategorias.innerHTML = options
+}
 
 function defineID() {
     let data = new Date()
@@ -35,7 +41,7 @@ function escondeModalCategoria() {
 
 function addCategoria() {
     let categoria = {}
-    if (nomeCategoria.value.length < 2) {
+    if (nomeCategoria.value.trim().length < 2) {
         alert('[ERRO] O nome da categoria deve conter ao menos 2 caracteres que não devem ser espaços em branco.')
     } else {
         categoria.nome = nomeCategoria.value
@@ -47,11 +53,14 @@ function addCategoria() {
 }
 
 function listarCategorias(lista) {
+
+    escondeModalDespesas()
+    escondeModalCategoria()
+    
     cadCategorias.classList.remove('esconde')
     telaHome.classList.add('esconde')
 
     let listaCategorias = ''
-    console.log(lista.length)
     if (lista.length == 0) {
         listaCategorias = `
             <tr>
@@ -93,7 +102,6 @@ function editarCategoria(id) {
             obj.nome = nomeCategoria.value
         }
     })
-    console.log(categorias)
     escondeModalCategoria()
     listarCategorias(categorias)
 }
