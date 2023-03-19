@@ -20,7 +20,6 @@ let opcoesCategorias = document.querySelector('#opcoesCategorias')
 let categoriaSelecionada = document.querySelector('#categoriaSelecionada')
 let totalAtrasadas = 0
 let filtroDespesa = document.querySelector('#filtroDespesa')
-let formAddDespesa = document.querySelector('.filtragem')
 
 function insereOptionsCategorias() {
     let options = ''
@@ -62,7 +61,6 @@ function testaData(dataDespesaTabela) {
 }
 
 function mostraModalDespesas() {
-    formAddDespesa.reset()
     insereOptionsCategorias()
     
     telaHome.classList.add('esconde')
@@ -207,5 +205,4 @@ botaoAdicionarDespesa.addEventListener('click', mostraModalDespesas)
 botaoCancelarDespesa.addEventListener('click', escondeModalDespesas)
 botaoSalvarDespesa.addEventListener('click', adicionarDespesa)
 filtroDespesa.addEventListener('keyup', filtraDespesas)
-
 montarTabelaDespesas(tabelaDespesas)

@@ -1,7 +1,7 @@
 // let corpoTabelaCategorias = document.querySelector('#corpoTabelaCategorias')
 let botaoAddCategoria = document.querySelector('#botaoAddCategoria')
 let addEditCategoria = document.querySelector('#addEditCategoria')
-let botaoAddCancelAddCategoria = document.querySelector('#botaoCancelAddCategoria')
+let botaoCancelAddCategoria = document.querySelector('#botaoCancelAddCategoria')
 let nomeCategoria = document.querySelector('#nomeCategoria')
 let botaoSalvarCategoria = document.querySelector('#botaoSalvarCategoria')
 let categorias = []
@@ -99,11 +99,17 @@ function abreEdicaoCategoria(id) {
 function editarCategoria(id) {
     categorias.map(obj => {
         if (obj.id == id) {
-            obj.nome = nomeCategoria.value
+
+            if (categorias.find(obj => obj.nome == nomeCategoria.value)) {
+                alert(`[ERRO] A categoria ${nomeCategoria.value} já existe.`)
+            } else {
+
+                obj.nome = nomeCategoria.value
+                escondeModalCategoria()
+                listarCategorias(categorias)
+            }
         }
     })
-    escondeModalCategoria()
-    listarCategorias(categorias)
 }
 
 function excluirCategoria(id) {
