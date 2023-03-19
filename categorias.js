@@ -11,10 +11,6 @@ let cadCtaegorias = document.querySelector('#cadCategorias')
 let filtroCategoria = document.querySelector('#filtroCategoria')
 
 
-function insereOptionsCategorias() {
-    let options = ''
-    categorias.forEach(obj => options += `<option>${obj.nome}</option>`)
-}
 
 function defineID() {
     let data = new Date()

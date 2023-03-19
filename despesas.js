@@ -20,6 +20,13 @@ let opcoesCategorias = document.querySelector('#opcoesCategorias')
 let categoriaSelecionada = document.querySelector('#categoriaSelecionada')
 let totalAtrasadas = 0
 let filtroDespesa = document.querySelector('#filtroDespesa')
+let formAddDespesa = document.querySelector('.filtragem')
+
+function insereOptionsCategorias() {
+    let options = ''
+    categorias.forEach(obj => options += `<option>${obj.nome}</option>`)
+    opcoesCategorias.innerHTML = options
+}
 
 function excluirDespesa(indice) {
     if (confirm('Deseja realmente excluir a despesa?')) {
@@ -55,6 +62,7 @@ function testaData(dataDespesaTabela) {
 }
 
 function mostraModalDespesas() {
+    formAddDespesa.reset()
     insereOptionsCategorias()
     
     telaHome.classList.add('esconde')
@@ -78,6 +86,7 @@ function montarTabelaDespesas(lista) {
     let totalAPagar = 0
     
     if (lista.length == 0) {
+
         linhaDespesa = `
         <tr>
         <td colspan='6'>Não existe despesa a ser exibida.</td>          
@@ -148,8 +157,6 @@ function validaDataVencimentoDespesa(data) {
 }
 
 function formataExibicaoDataDespesa(data) {
-    let dataParaExibir = ''
-    
     anoExibicao = data.slice(0,4)
     mesExibicao = data.slice(5,7)
     diaExibicao = data.slice(8,10)
@@ -200,4 +207,5 @@ botaoAdicionarDespesa.addEventListener('click', mostraModalDespesas)
 botaoCancelarDespesa.addEventListener('click', escondeModalDespesas)
 botaoSalvarDespesa.addEventListener('click', adicionarDespesa)
 filtroDespesa.addEventListener('keyup', filtraDespesas)
+
 montarTabelaDespesas(tabelaDespesas)
