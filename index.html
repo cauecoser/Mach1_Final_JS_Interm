@@ -55,7 +55,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <p class="tituloHeadTabela">Data de Vencimento</p>
+                                    <p class="tituloHeadTabela">Vencimento</p>
                                 </th>
                                 <th>
                                     <p class="tituloHeadTabela">Despesa</p>
@@ -66,7 +66,10 @@
                                 <th>
                                     <p class="tituloHeadTabela">Categoria</p>
                                 </th>
-                                <th>Status</th>
+                                <th>
+                                    <p class="tituloHeadTabela">Status</p>
+                                </th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody id="corpoTabelaDespesas">
@@ -133,7 +136,6 @@
                         <legend>Filtrar</legend>
                         <input id="filtroCategoria" class="textoPesquisa" type="text">
                     </div>
-                    <!-- <input id="botaoFiltrar" class="botao" type="button" value="FILTRAR"> -->
                 </form>
                 <div class="areaTabela">
                     <table class="tabela">
@@ -149,61 +151,6 @@
                             </tr>
                         </thead>
                         <tbody id="corpoTabelaCategorias">
-                            <!-- <tr>
-                                <td>1010232322</td>
-                                <td>Gerais</td>
-                                <td>
-                                    <div class="salvarOuCancelar espacoBotoes">
-                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
-                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
-                                            value="EXCLUIR">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1010232323</td>
-                                <td>Viagem</td>
-                                <td>
-                                    <div class="salvarOuCancelar espacoBotoes">
-                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
-                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
-                                            value="EXCLUIR">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1010232324</td>
-                                <td>Mercado</td>
-                                <td>
-                                    <div class="salvarOuCancelar espacoBotoes">
-                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
-                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
-                                            value="EXCLUIR">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1010232325</td>
-                                <td>Jogos</td>
-                                <td>
-                                    <div class="salvarOuCancelar espacoBotoes">
-                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
-                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
-                                            value="EXCLUIR">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1010232326</td>
-                                <td>Padaria</td>
-                                <td>
-                                    <div class="salvarOuCancelar espacoBotoes">
-                                        <input id="botaoFiltrar" class="botao" type="button" value="SALVAR">
-                                        <input id="botaoFiltrar" class="botao botaoCancel" type="button"
-                                            value="EXCLUIR">
-                                    </div>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                     <input id="botaoAddCategoria" class="botao botaoAdicionar" type="button" value="+ CATEGORIA">
@@ -232,7 +179,7 @@
         </main>
     </div>
 
-    <footer hidden>
+    <footer>
         <p>&copy; <em>IrOnDev</em> em parceria com <em>Mach1</em> - Pilotando para o futuro!</p>
     </footer>
 </body>

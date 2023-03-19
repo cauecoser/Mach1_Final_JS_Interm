@@ -20,8 +20,23 @@ let opcoesCategorias = document.querySelector('#opcoesCategorias')
 let categoriaSelecionada = document.querySelector('#categoriaSelecionada')
 let totalAtrasadas = 0
 let filtroDespesa = document.querySelector('#filtroDespesa')
+
+function excluirDespesa(indice) {
+    if (confirm('Deseja realmente excluir a despesa?')) {
+        tabelaDespesas.find((obj, index) => {
+            if (indice == index) {
+                tabelaDespesas.splice(index, 1)
+                if (testaData(obj.data)) {
+                    totalAtrasadas--
+                }
+                montarTabelaDespesas(tabelaDespesas)
+            }
+        })
+    }
+}
+
 function filtraDespesas() {
-    let despesasFiltradas = tabelaDespesas.filter(despesa => 
+    let despesasFiltradas = tabelaDespesas.filter(despesa =>
         despesa.data.includes(filtroDespesa.value) ||
         despesa.nome.toLowerCase().includes(filtroDespesa.value.toLowerCase()) ||
         despesa.valor.includes(filtroDespesa.value) ||
@@ -33,15 +48,15 @@ function filtraDespesas() {
 
 function testaData(dataDespesaTabela) {
     let data = new Date()
-    let [anoDataTabela, mesDataTabela, diaDataTabela] = dataDespesaTabela.split('-')
-    let dataDespesa = new Date(anoDataTabela, (mesDataTabela - 1), diaDataTabela)
+    let [diaDataTabela, mesDataTabela, anoDataTabela] = dataDespesaTabela.split('-')
+    let dataDespesa = new Date(diaDataTabela, (mesDataTabela - 1),anoDataTabela)
 
     return data >= dataDespesa
 }
 
 function mostraModalDespesas() {
     insereOptionsCategorias()
-
+    
     telaHome.classList.add('esconde')
     addDespesa.classList.remove('esconde')
 }
@@ -52,25 +67,25 @@ function escondeModalDespesas() {
 }
 
 function montarTabelaDespesas(lista) {
-
+    
     escondeModalDespesas()
     addEditCategoria.classList.add('esconde')
     cadCategorias.classList.add('esconde')
     telaHome.classList.remove('esconde')
-
+    
     let linhaDespesa = ''
     let totalPago = 0
     let totalAPagar = 0
-
+    
     if (lista.length == 0) {
         linhaDespesa = `
         <tr>
-                <td colspan='5'>Não existe despesa a ser exibida.</td>          
-            </tr>
+        <td colspan='6'>Não existe despesa a ser exibida.</td>          
+        </tr>
         `
     } else {
         lista.forEach((obj, index) => {
-
+            
             if (obj.status == "PAGO") {
                 stats = "btnPago"
                 corLinha = "linhaVerde"
@@ -81,14 +96,15 @@ function montarTabelaDespesas(lista) {
                 totalAPagar += Number(obj.valor)
             }
             valorResumoAtrasadas.innerHTML = totalAtrasadas
-
+            
             linhaDespesa += `
-                <tr>
-                    <td class="${corLinha}">${obj.data}</td>
+            <tr>
+            <td class="${corLinha}">${formataExibicaoDataDespesa(obj.data)}</td>
                     <td class="${corLinha}">${obj.nome}</td>
                     <td class="${corLinha}">${formataReal(obj.valor)}</td>
                     <td class="${corLinha}">${obj.categoria}</td>
                     <td><input type="button" class="botao ${stats}" value="${obj.status}" onclick="trocaStatus(${index})"></td>
+                    <td><input type="button" class="botao botaoCancel" value="EXCLUIR" onclick="excluirDespesa(${index})"></td>
                 </tr>
             `
         })
@@ -107,7 +123,7 @@ function trocaStatus(indice) {
         if (indice == index) {
             if (obj.status == "PAGO") {
                 obj.status = "PENDENTE"
-
+                
                 if (testaData(obj.data)) {
                     totalAtrasadas++
                 }
@@ -122,24 +138,60 @@ function trocaStatus(indice) {
     montarTabelaDespesas(tabelaDespesas)
 }
 
-function adicionarDespesa() {
-
-    escondeModalDespesas()
-
-    let despesa = {}
-
-    despesa.data = dataVencimentoDespesa.value
-    despesa.nome = nomeDespesa.value
-    despesa.valor = valorDespesa.value
-    despesa.categoria = categoriaSelecionada.value
-    despesa.status = "PENDENTE"
-
-    if (testaData(despesa.data)) {
-        totalAtrasadas++
+function validaDataVencimentoDespesa(data) {
+    if (`${dataVencimentoDespesa.value}`.length != 10) {
+        alert('[ERRO] A data informada não possui formato adequado (dd/mm/aaaa). Insira um formato válido para continuar.')
+        mostraModalDespesas()
+    } else {
+        data = dataVencimentoDespesa.value
     }
+}
 
-    tabelaDespesas.push(despesa)
-    montarTabelaDespesas(tabelaDespesas)
+function formataExibicaoDataDespesa(data) {
+    let dataParaExibir = ''
+    
+    anoExibicao = data.slice(0,4)
+    mesExibicao = data.slice(5,7)
+    diaExibicao = data.slice(8,10)
+    
+    return dataParaExibir = `${diaExibicao}/${mesExibicao}/${anoExibicao}`
+}
+
+function adicionarDespesa() {
+    escondeModalDespesas()
+    
+    if (tabelaDespesas.find(obj => obj.nome == nomeDespesa.value)) {
+        alert('[ERRO] A despesa informada já existe! Altere o nome da despesa para realizar a inclusão.')
+        mostraModalDespesas()
+        
+    } else {
+        
+        if (categorias.find(obj => obj.nome == categoriaSelecionada.value)) {
+
+            let despesa = {}
+            
+            despesa.data = dataVencimentoDespesa.value
+            despesa.nome = nomeDespesa.value
+            despesa.valor = valorDespesa.value
+            despesa.categoria = categoriaSelecionada.value
+            despesa.status = "PENDENTE"
+
+            validaDataVencimentoDespesa(despesa.data)
+            
+            if (testaData(despesa.data)) {
+                totalAtrasadas++
+            }
+            
+            tabelaDespesas.push(despesa)
+            montarTabelaDespesas(tabelaDespesas)
+        } else {
+            if(confirm('[ERRO] Não é possível adicionar uma categoria que não esteja cadastrada. Cadastre a categoria desejada antes de inserir a despesa. Deseja adicionar a categoria?')) {
+                mostraModalCategoria()
+            } else {
+                mostraModalDespesas()
+            }
+        }
+    }
 }
 
 

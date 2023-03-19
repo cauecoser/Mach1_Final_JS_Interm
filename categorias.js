@@ -14,7 +14,6 @@ let filtroCategoria = document.querySelector('#filtroCategoria')
 function insereOptionsCategorias() {
     let options = ''
     categorias.forEach(obj => options += `<option>${obj.nome}</option>`)
-    opcoesCategorias.innerHTML = options
 }
 
 function defineID() {
@@ -33,6 +32,7 @@ function mostraModalCategoria() {
     addEditCategoria.classList.remove('esconde')
     nomeCategoria.value = ''
     botaoSalvarCategoria.setAttribute("onclick", "addCategoria()")
+    nomeCategoria.focus()
 }
 
 function escondeModalCategoria() {
@@ -46,9 +46,13 @@ function addCategoria() {
     } else {
         categoria.nome = nomeCategoria.value
         categoria.id = defineID()
-        categorias.push(categoria)
-        addEditCategoria.classList.add('esconde')
-        listarCategorias(categorias)
+        if (categorias.find(obj => obj.nome == nomeCategoria.value)) {
+            alert(`[ERRO] A categoria ${nomeCategoria.value} já existe.`)
+        } else {
+            categorias.push(categoria)
+            addEditCategoria.classList.add('esconde')
+            listarCategorias(categorias)
+        }
     }
 }
 
@@ -56,7 +60,7 @@ function listarCategorias(lista) {
 
     escondeModalDespesas()
     escondeModalCategoria()
-    
+
     cadCategorias.classList.remove('esconde')
     telaHome.classList.add('esconde')
 
@@ -109,11 +113,15 @@ function editarCategoria(id) {
 function excluirCategoria(id) {
     if (confirm('Deseja realmente excluir a categoria?')) {
         categorias.find((obj, index) => {
-            if(obj.id == id) {
-                categorias.splice(index,1)
+            if (tabelaDespesas.find(despesa => despesa.categoria == obj.nome)) {
+                alert(`Não é possíel excluir a categoria ${obj.nome}. Existem despesas atreladas a ela. Exclua as depesas para que a categoria possa ser excluída.`)
+            } else {
+                if (obj.id == id) {
+                    categorias.splice(index, 1)
+                    listarCategorias(categorias)
+                }
             }
         })
-        listarCategorias(categorias)
     }
 }
 
