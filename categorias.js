@@ -48,6 +48,7 @@ function addCategoria() {
             categorias.push(categoria)
             addEditCategoria.classList.add('esconde')
             listarCategorias(categorias)
+            alert('Categoria criada com sucesso!')
         }
     }
 }
@@ -121,6 +122,7 @@ function excluirCategoria(id) {
                 if (obj.id == id) {
                     categorias.splice(index, 1)
                     listarCategorias(categorias)
+                    alert('Categoria excluída com sucesso!')
                 }
             }
         })

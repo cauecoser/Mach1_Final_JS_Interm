@@ -20,6 +20,21 @@ let opcoesCategorias = document.querySelector('#opcoesCategorias')
 let categoriaSelecionada = document.querySelector('#categoriaSelecionada')
 let totalAtrasadas = 0
 let filtroDespesa = document.querySelector('#filtroDespesa')
+let mensagem = document.querySelector('#mensagem')
+let paragrafoMensagem = document.querySelector('#paragrafoMensagem')
+
+function criaEExibeMensagem(texto, tipo) {
+    mensagem.classList.add(`${tipo}`)
+    paragrafoMensagem.classList.remove('esconde')  
+    paragrafoMensagem.innerHTML = texto
+    
+    setTimeout(() => {
+        mensagem.classList.add(`esconde`)
+        paragrafoMensagem.classList.add('esconde')  
+        mensagem.classList.remove(`sucesso`)
+    }, 1500);
+}
+
 
 function insereOptionsCategorias() {
     let options = ''
@@ -27,15 +42,21 @@ function insereOptionsCategorias() {
     opcoesCategorias.innerHTML = options
 }
 
+function contaDespesasAtrasadas(data, tipo) {
+
+    return tipo == 'soma' && testaData(data) ? totalAtrasadas++ : totalAtrasadas--
+
+}
+
 function excluirDespesa(indice) {
     if (confirm('Deseja realmente excluir a despesa?')) {
         tabelaDespesas.find((obj, index) => {
             if (indice == index) {
                 tabelaDespesas.splice(index, 1)
-                if (testaData(obj.data)) {
-                    totalAtrasadas--
-                }
+                console.log(obj.data)
+                contaDespesasAtrasadas(obj.data, 'sub')
                 montarTabelaDespesas(tabelaDespesas)
+                alert('Despesa excluída com sucesso!')
             }
         })
     }
@@ -55,14 +76,14 @@ function filtraDespesas() {
 function testaData(dataDespesaTabela) {
     let data = new Date()
     let [diaDataTabela, mesDataTabela, anoDataTabela] = dataDespesaTabela.split('-')
-    let dataDespesa = new Date(diaDataTabela, (mesDataTabela - 1),anoDataTabela)
+    let dataDespesa = new Date(diaDataTabela, (mesDataTabela - 1), anoDataTabela)
 
     return data >= dataDespesa
 }
 
 function mostraModalDespesas() {
-    insereOptionsCategorias()
-    
+    // insereOptionsCategorias()
+
     telaHome.classList.add('esconde')
     addDespesa.classList.remove('esconde')
 }
@@ -73,16 +94,16 @@ function escondeModalDespesas() {
 }
 
 function montarTabelaDespesas(lista) {
-    
+
     escondeModalDespesas()
     addEditCategoria.classList.add('esconde')
     cadCategorias.classList.add('esconde')
     telaHome.classList.remove('esconde')
-    
+
     let linhaDespesa = ''
     let totalPago = 0
     let totalAPagar = 0
-    
+
     if (lista.length == 0) {
 
         linhaDespesa = `
@@ -92,37 +113,46 @@ function montarTabelaDespesas(lista) {
         `
     } else {
         lista.forEach((obj, index) => {
-            
+
             if (obj.status == "PAGO") {
                 stats = "btnPago"
                 corLinha = "linhaVerde"
-                totalPago += Number(obj.valor)
+                totalPago += Number(obj.valor.replace('.', '').replace(',', '.'))
             } else {
                 stats = "btnPendente"
                 corLinha = "linhaVermelha"
-                totalAPagar += Number(obj.valor)
+                totalAPagar += Number(obj.valor.replace('.', '').replace(',', '.'))
             }
-            valorResumoAtrasadas.innerHTML = totalAtrasadas
-            
+
             linhaDespesa += `
             <tr>
             <td class="${corLinha}">${formataExibicaoDataDespesa(obj.data)}</td>
-                    <td class="${corLinha}">${obj.nome}</td>
-                    <td class="${corLinha}">${formataReal(obj.valor)}</td>
-                    <td class="${corLinha}">${obj.categoria}</td>
-                    <td><input type="button" class="botao ${stats}" value="${obj.status}" onclick="trocaStatus(${index})"></td>
-                    <td><input type="button" class="botao botaoCancel" value="EXCLUIR" onclick="excluirDespesa(${index})"></td>
-                </tr>
+            <td class="${corLinha}">${obj.nome}</td>
+            <td class="${corLinha}">${formataReal(obj.valor)}</td>
+            <td class="${corLinha}">${obj.categoria}</td>
+            <td><input type="button" class="botao ${stats}" value="${obj.status}" onclick="trocaStatus(${index})"></td>
+            <td><input type="button" class="botao botaoCancel" value="EXCLUIR" onclick="excluirDespesa(${index})"></td>
+            </tr>
             `
         })
     }
+
+    valorResumoAtrasadas.innerHTML = totalAtrasadas
     corpoTabelaDespesas.innerHTML = linhaDespesa
-    valorResumoPagas.innerHTML = formataReal(totalPago)
-    valorResumoAPagar.innerHTML = formataReal(totalAPagar)
+    valorResumoPagas.innerHTML = Number(totalPago).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+    valorResumoAPagar.innerHTML = Number(totalAPagar).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
 
-function formataReal(campo) {
-    return Number(campo).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+function formataReal(campo, apenasNumeros) {
+    if (apenasNumeros) {
+        let aux = ''
+        aux = campo.replace(/\D/g, '')
+        aux = (aux / 100).toFixed(2) + ''
+        aux = aux.replace(".", ",")
+        aux = aux.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        return aux
+    }
+    return `R$ ${campo}`
 }
 
 function trocaStatus(indice) {
@@ -130,15 +160,13 @@ function trocaStatus(indice) {
         if (indice == index) {
             if (obj.status == "PAGO") {
                 obj.status = "PENDENTE"
-                
-                if (testaData(obj.data)) {
-                    totalAtrasadas++
-                }
+
+                contaDespesasAtrasadas(obj.data, 'soma')
+
             } else {
                 obj.status = "PAGO"
-                if (testaData(obj.data)) {
-                    totalAtrasadas--
-                }
+                contaDespesasAtrasadas(obj.data, 'sub')
+
             }
         }
     })
@@ -146,51 +174,56 @@ function trocaStatus(indice) {
 }
 
 function validaDataVencimentoDespesa(data) {
-    if (`${dataVencimentoDespesa.value}`.length != 10) {
+    if (`${data}`.length != 10) {
         alert('[ERRO] A data informada não possui formato adequado (dd/mm/aaaa). Insira um formato válido para continuar.')
-        mostraModalDespesas()
-    } else {
-        data = dataVencimentoDespesa.value
+        return false
     }
+    return true
 }
 
 function formataExibicaoDataDespesa(data) {
-    anoExibicao = data.slice(0,4)
-    mesExibicao = data.slice(5,7)
-    diaExibicao = data.slice(8,10)
-    
+    anoExibicao = data.slice(0, 4)
+    mesExibicao = data.slice(5, 7)
+    diaExibicao = data.slice(8, 10)
+
     return dataParaExibir = `${diaExibicao}/${mesExibicao}/${anoExibicao}`
 }
 
 function adicionarDespesa() {
     escondeModalDespesas()
-    
+
     if (tabelaDespesas.find(obj => obj.nome == nomeDespesa.value)) {
         alert('[ERRO] A despesa informada já existe! Altere o nome da despesa para realizar a inclusão.')
         mostraModalDespesas()
-        
+    } else if (nomeDespesa.value.trim().length < 2) {
+        alert('[ERRO] O nome da despesa deve conter pelo menos 2 caracteres que não podem ser espaços em branco. Altere o nome da despesa para realizar a inclusão.')
+        mostraModalDespesas()
+    } else if (valorDespesa.value.length == 0) {
+        alert('[ERRO] O valor da despesa deve ser preenchido!.')
+        mostraModalDespesas()
     } else {
-        
         if (categorias.find(obj => obj.nome == categoriaSelecionada.value)) {
 
             let despesa = {}
-            
+
             despesa.data = dataVencimentoDespesa.value
             despesa.nome = nomeDespesa.value
             despesa.valor = valorDespesa.value
             despesa.categoria = categoriaSelecionada.value
             despesa.status = "PENDENTE"
 
-            validaDataVencimentoDespesa(despesa.data)
-            
-            if (testaData(despesa.data)) {
-                totalAtrasadas++
+            if (!validaDataVencimentoDespesa(despesa.data)) {
+                mostraModalDespesas()
+                return false
             }
-            
+
+            contaDespesasAtrasadas(despesa.data, 'soma')
+
             tabelaDespesas.push(despesa)
             montarTabelaDespesas(tabelaDespesas)
+            alert('Despesa incluída com sucesso!')
         } else {
-            if(confirm('[ERRO] Não é possível adicionar uma categoria que não esteja cadastrada. Cadastre a categoria desejada antes de inserir a despesa. Deseja adicionar a categoria?')) {
+            if (confirm('[ERRO] Não é possível adicionar na despesa uma categoria que não esteja cadastrada. Cadastre a categoria desejada antes de inserir a despesa. Deseja adicionar a categoria?')) {
                 mostraModalCategoria()
             } else {
                 mostraModalDespesas()
@@ -201,8 +234,15 @@ function adicionarDespesa() {
 
 
 linkDespesas.addEventListener('click', () => montarTabelaDespesas(tabelaDespesas))
-botaoAdicionarDespesa.addEventListener('click', mostraModalDespesas)
+botaoAdicionarDespesa.addEventListener('click', () => {
+    mostraModalDespesas()
+    insereOptionsCategorias()
+})
 botaoCancelarDespesa.addEventListener('click', escondeModalDespesas)
 botaoSalvarDespesa.addEventListener('click', adicionarDespesa)
 filtroDespesa.addEventListener('keyup', filtraDespesas)
+valorDespesa.addEventListener('keyup', () => {
+    valorDespesa.value = formataReal(valorDespesa.value, true)
+})
+
 montarTabelaDespesas(tabelaDespesas)
