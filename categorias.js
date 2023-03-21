@@ -7,7 +7,7 @@ let botaoSalvarCategoria = document.querySelector('#botaoSalvarCategoria')
 let categorias = []
 let id = ''
 let linkCategorias = document.querySelector('#linkCategorias')
-let cadCtaegorias = document.querySelector('#cadCategorias')
+let cadCategorias = document.querySelector('#cadCategorias')
 let filtroCategoria = document.querySelector('#filtroCategoria')
 
 
@@ -48,7 +48,8 @@ function addCategoria() {
             categorias.push(categoria)
             addEditCategoria.classList.add('esconde')
             listarCategorias(categorias)
-            alert('Categoria criada com sucesso!')
+            msg('Categoria criada com sucesso!', 'sucesso')
+            // escondeMensagem()
         }
     }
 }

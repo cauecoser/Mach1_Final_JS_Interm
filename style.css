@@ -7,7 +7,7 @@
     --pos-font-color: #090;
     --neg-font-color: #D00;
     --att-font-color: #FC0;
-    --footer-font-color: #000A  ;
+    --footer-font-color: #000A;
 
     --fst-theme-color: #0C8;
     --sec-theme-color: #EEE;
@@ -22,7 +22,7 @@
     --success-border-color: #030;
     --failure-border-color: #700;
     --failure-bckg-color: #f86384;
-    
+    --alert-bckg-color: #
 
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -80,7 +80,7 @@ a:hover {
     position: fixed;
     overflow: auto;
     top: 84px;
-    
+
 }
 
 #resumoDespesas {
@@ -95,7 +95,7 @@ a:hover {
     border-top: none;
     /* margin-top: 50px; */
     text-align: center;
-    box-shadow: 0px 2px 2px var(--trd-theme-color) ;
+    box-shadow: 0px 2px 2px var(--trd-theme-color);
 }
 
 #resumoPagas {
@@ -286,7 +286,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .esconde {
-    display: none;    
+    display: none;
 }
 
 .espacoBotoes {
@@ -294,7 +294,8 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 0;
 }
 
-#addEditCategoria, #addDespesa {
+#addEditCategoria,
+#addDespesa {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -352,24 +353,26 @@ footer {
     right: 50px;
     padding: 10px;
     border-radius: 8px;
-    font-size: 1.2em;
-    font-weight: bold;
     transition: 1.5s;
 }
 
 #paragrafoMensagem {
-    opacity: 1;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--sec-font-color);
     transition: 1.5s;
 }
 
 .sucesso {
     background-color: var(--fst-theme-color);
     border: solid 1px var(--success-border-color);
-    color: var(--success-border-color);
 }
 
 .falha {
     background-color: var(--failure-bckg-color);
     border: solid 1px var(--failure-border-color);
-    color: var(--failure-border-color);
+}
+
+.alerta {
+
 }

@@ -23,16 +23,18 @@ let filtroDespesa = document.querySelector('#filtroDespesa')
 let mensagem = document.querySelector('#mensagem')
 let paragrafoMensagem = document.querySelector('#paragrafoMensagem')
 
-function criaEExibeMensagem(texto, tipo) {
+function msg(texto, tipo) {
     mensagem.classList.add(`${tipo}`)
-    paragrafoMensagem.classList.remove('esconde')  
     paragrafoMensagem.innerHTML = texto
-    
+    mensagem.classList.remove('esconde')
+    paragrafoMensagem.classList.remove('esconde')  
     setTimeout(() => {
-        mensagem.classList.add(`esconde`)
+        mensagem.classList.remove(`${tipo}`)
         paragrafoMensagem.classList.add('esconde')  
-        mensagem.classList.remove(`sucesso`)
-    }, 1500);
+    }, 3000);
+}
+
+function escondeMensagem() {
 }
 
 
@@ -82,8 +84,6 @@ function testaData(dataDespesaTabela) {
 }
 
 function mostraModalDespesas() {
-    // insereOptionsCategorias()
-
     telaHome.classList.add('esconde')
     addDespesa.classList.remove('esconde')
 }
@@ -94,7 +94,6 @@ function escondeModalDespesas() {
 }
 
 function montarTabelaDespesas(lista) {
-
     escondeModalDespesas()
     addEditCategoria.classList.add('esconde')
     cadCategorias.classList.add('esconde')
