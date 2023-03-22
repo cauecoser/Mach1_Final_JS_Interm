@@ -3,6 +3,8 @@ let corpoTabelaDespesas = document.querySelector('#corpoTabelaDespesas')
 let stats = ''
 let corLinha = ''
 let linkDespesas = document.querySelector('#linkDespesas')
+// let listaDespesasLocalStorage = JSON.parse(localStorage.getItem('listaDespesasLocalStorage'))
+// let despesas = listaDespesasLocalStorage ?? []
 let despesas = []
 let addDespesa = document.querySelector('#addDespesa')
 let botaoAdicionarDespesa = document.querySelector('#botaoAdicionarDespesa')
@@ -25,18 +27,13 @@ let paragrafoMensagem = document.querySelector('#paragrafoMensagem')
 
 function msg(texto, tipo) {
     mensagem.classList.add(`${tipo}`)
-    paragrafoMensagem.innerHTML = texto
+    mensagem.innerHTML = texto
     mensagem.classList.remove('esconde')
-    paragrafoMensagem.classList.remove('esconde')  
     setTimeout(() => {
+        mensagem.innerHTML = ''
         mensagem.classList.remove(`${tipo}`)
-        paragrafoMensagem.classList.add('esconde')  
     }, 3000);
 }
-
-function escondeMensagem() {
-}
-
 
 function insereOptionsCategorias() {
     let options = ''
@@ -45,9 +42,7 @@ function insereOptionsCategorias() {
 }
 
 function contaDespesasAtrasadas(data, tipo) {
-
     return tipo == 'soma' && testaData(data) ? totalAtrasadas++ : totalAtrasadas--
-
 }
 
 function excluirDespesa(indice) {
@@ -58,7 +53,7 @@ function excluirDespesa(indice) {
                 console.log(obj.data)
                 contaDespesasAtrasadas(obj.data, 'sub')
                 montarTabelaDespesas(tabelaDespesas)
-                alert('Despesa excluída com sucesso!')
+                msg('Despesa excluída com sucesso!', 'sucesso')
             }
         })
     }
@@ -67,9 +62,9 @@ function excluirDespesa(indice) {
 function filtraDespesas() {
     let despesasFiltradas = tabelaDespesas.filter(despesa =>
         despesa.data.includes(filtroDespesa.value) ||
-        despesa.nome.toLowerCase().includes(filtroDespesa.value.toLowerCase()) ||
+        despesa.nome.toLowerCase().trim().includes(filtroDespesa.value.toLowerCase().trim()) ||
         despesa.valor.includes(filtroDespesa.value) ||
-        despesa.categoria.toLowerCase().includes(filtroDespesa.value.toLowerCase()) ||
+        despesa.categoria.toLowerCase().trim().includes(filtroDespesa.value.toLowerCase().trim()) ||
         despesa.status.toLowerCase().includes(filtroDespesa.value.toLowerCase())
     )
     montarTabelaDespesas(despesasFiltradas)
@@ -86,11 +81,13 @@ function testaData(dataDespesaTabela) {
 function mostraModalDespesas() {
     telaHome.classList.add('esconde')
     addDespesa.classList.remove('esconde')
+    categoriaSelecionada.focus()
 }
 
 function escondeModalDespesas() {
     telaHome.classList.remove('esconde')
     addDespesa.classList.add('esconde')
+    filtroDespesa.focus()
 }
 
 function montarTabelaDespesas(lista) {
@@ -112,7 +109,7 @@ function montarTabelaDespesas(lista) {
         `
     } else {
         lista.forEach((obj, index) => {
-
+            
             if (obj.status == "PAGO") {
                 stats = "btnPago"
                 corLinha = "linhaVerde"
@@ -134,12 +131,17 @@ function montarTabelaDespesas(lista) {
             </tr>
             `
         })
+        // atualizaDespesasLocalStorage(lista)
     }
-
+    
     valorResumoAtrasadas.innerHTML = totalAtrasadas
     corpoTabelaDespesas.innerHTML = linhaDespesa
     valorResumoPagas.innerHTML = Number(totalPago).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
     valorResumoAPagar.innerHTML = Number(totalAPagar).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+}
+
+function atualizaDespesasLocalStorage(lista) {
+    localStorage.setItem('listaDespesasLocalStorage', JSON.stringify(lista))
 }
 
 function formataReal(campo, apenasNumeros) {
@@ -174,7 +176,7 @@ function trocaStatus(indice) {
 
 function validaDataVencimentoDespesa(data) {
     if (`${data}`.length != 10) {
-        alert('[ERRO] A data informada não possui formato adequado (dd/mm/aaaa). Insira um formato válido para continuar.')
+        msg('[ERRO] A data informada não possui formato adequado (dd/mm/aaaa). Insira um formato válido para continuar.', 'falha')
         return false
     }
     return true
@@ -191,14 +193,11 @@ function formataExibicaoDataDespesa(data) {
 function adicionarDespesa() {
     escondeModalDespesas()
 
-    if (tabelaDespesas.find(obj => obj.nome == nomeDespesa.value)) {
-        alert('[ERRO] A despesa informada já existe! Altere o nome da despesa para realizar a inclusão.')
-        mostraModalDespesas()
-    } else if (nomeDespesa.value.trim().length < 2) {
-        alert('[ERRO] O nome da despesa deve conter pelo menos 2 caracteres que não podem ser espaços em branco. Altere o nome da despesa para realizar a inclusão.')
+    if (nomeDespesa.value.trim().length < 2) {
+        msg('[ERRO] O nome da despesa deve conter pelo menos 2 caracteres que não podem ser espaços em branco. Altere o nome da despesa para realizar a inclusão.','falha')
         mostraModalDespesas()
     } else if (valorDespesa.value.length == 0) {
-        alert('[ERRO] O valor da despesa deve ser preenchido!.')
+        msg('[ERRO] O valor da despesa deve ser preenchido!.', 'alerta')
         mostraModalDespesas()
     } else {
         if (categorias.find(obj => obj.nome == categoriaSelecionada.value)) {
@@ -220,10 +219,11 @@ function adicionarDespesa() {
 
             tabelaDespesas.push(despesa)
             montarTabelaDespesas(tabelaDespesas)
-            alert('Despesa incluída com sucesso!')
+            msg('Despesa incluída com sucesso!', 'sucesso')
         } else {
             if (confirm('[ERRO] Não é possível adicionar na despesa uma categoria que não esteja cadastrada. Cadastre a categoria desejada antes de inserir a despesa. Deseja adicionar a categoria?')) {
                 mostraModalCategoria()
+                nomeCategoria.value = categoriaSelecionada.value
             } else {
                 mostraModalDespesas()
             }

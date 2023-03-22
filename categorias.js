@@ -4,12 +4,12 @@ let addEditCategoria = document.querySelector('#addEditCategoria')
 let botaoCancelAddCategoria = document.querySelector('#botaoCancelAddCategoria')
 let nomeCategoria = document.querySelector('#nomeCategoria')
 let botaoSalvarCategoria = document.querySelector('#botaoSalvarCategoria')
-let categorias = []
+let listaCategoriasLocalStorage = JSON.parse(localStorage.getItem('listaCategoriasLocalStorage'))
+let categorias = listaCategoriasLocalStorage ?? []
 let id = ''
 let linkCategorias = document.querySelector('#linkCategorias')
 let cadCategorias = document.querySelector('#cadCategorias')
 let filtroCategoria = document.querySelector('#filtroCategoria')
-
 
 
 function defineID() {
@@ -33,17 +33,18 @@ function mostraModalCategoria() {
 
 function escondeModalCategoria() {
     addEditCategoria.classList.add('esconde')
+    filtroCategoria.focus()
 }
 
 function addCategoria() {
     let categoria = {}
     if (nomeCategoria.value.trim().length < 2) {
-        alert('[ERRO] O nome da categoria deve conter ao menos 2 caracteres que não devem ser espaços em branco.')
+        msg('[ERRO] Não é possível adicionar a categoria. O nome da categoria deve conter ao menos 2 caracteres que não devem ser espaços em branco.', 'falha')
     } else {
         categoria.nome = nomeCategoria.value
         categoria.id = defineID()
-        if (categorias.find(obj => obj.nome == nomeCategoria.value)) {
-            alert(`[ERRO] A categoria ${nomeCategoria.value} já existe.`)
+        if (categorias.find(obj => obj.nome.toLowerCase().trim() == nomeCategoria.value.toLowerCase().trim())) {
+            msg(`[ERRO] A categoria ${nomeCategoria.value} já existe.`,'alerta')
         } else {
             categorias.push(categoria)
             addEditCategoria.classList.add('esconde')
@@ -85,10 +86,15 @@ function listarCategorias(lista) {
         })
     }
     corpoTabelaCategorias.innerHTML = listaCategorias
+    atualizaCategoriasLocalStorage(lista)
+}
+
+function atualizaCategoriasLocalStorage(lista) {
+    localStorage.setItem('listaCategoriasLocalStorage', JSON.stringify(lista))
 }
 
 function filtraCategorias() {
-    let categoriasFiltradas = categorias.filter(cat => cat.nome.toLowerCase().includes(filtroCategoria.value.toLowerCase()))
+    let categoriasFiltradas = categorias.filter(cat => cat.nome.toLowerCase().trim().includes(filtroCategoria.value.toLowerCase().trim()))
     listarCategorias(categoriasFiltradas)
 }
 
@@ -103,12 +109,12 @@ function editarCategoria(id) {
         if (obj.id == id) {
 
             if (categorias.find(obj => obj.nome == nomeCategoria.value)) {
-                alert(`[ERRO] A categoria ${nomeCategoria.value} já existe.`)
+                msg(`[ERRO] A categoria ${nomeCategoria.value} já existe.`, 'alerta')
             } else {
-
                 obj.nome = nomeCategoria.value
                 escondeModalCategoria()
                 listarCategorias(categorias)
+                msg('A categoria foi editada.', 'sucesso')
             }
         }
     })
@@ -118,12 +124,12 @@ function excluirCategoria(id) {
     if (confirm('Deseja realmente excluir a categoria?')) {
         categorias.find((obj, index) => {
             if (tabelaDespesas.find(despesa => despesa.categoria == obj.nome)) {
-                alert(`Não é possíel excluir a categoria ${obj.nome}. Existem despesas atreladas a ela. Exclua as depesas para que a categoria possa ser excluída.`)
+                msg(`Não é possíel excluir a categoria "${obj.nome}". Existem despesas atreladas a ela. Exclua as depesas para que a categoria possa ser excluída.`, 'falha')
             } else {
                 if (obj.id == id) {
                     categorias.splice(index, 1)
                     listarCategorias(categorias)
-                    alert('Categoria excluída com sucesso!')
+                    msg('Categoria excluída com sucesso!', 'sucesso')
                 }
             }
         })
@@ -132,5 +138,9 @@ function excluirCategoria(id) {
 
 botaoAddCategoria.addEventListener('click', () => mostraModalCategoria())
 botaoCancelAddCategoria.addEventListener('click', escondeModalCategoria)
-linkCategorias.addEventListener('click', () => listarCategorias(categorias))
+linkCategorias.addEventListener('click', () => {
+    console.log(categorias)
+    listarCategorias(categorias)
+    
+})
 filtroCategoria.addEventListener('keyup', filtraCategorias)
