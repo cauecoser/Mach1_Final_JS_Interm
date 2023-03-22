@@ -139,7 +139,6 @@ function excluirCategoria(id) {
 botaoAddCategoria.addEventListener('click', () => mostraModalCategoria())
 botaoCancelAddCategoria.addEventListener('click', escondeModalCategoria)
 linkCategorias.addEventListener('click', () => {
-    console.log(categorias)
     listarCategorias(categorias)
     
 })

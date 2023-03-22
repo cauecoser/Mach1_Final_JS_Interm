@@ -50,7 +50,6 @@ function excluirDespesa(indice) {
         tabelaDespesas.find((obj, index) => {
             if (indice == index) {
                 tabelaDespesas.splice(index, 1)
-                console.log(obj.data)
                 contaDespesasAtrasadas(obj.data, 'sub')
                 montarTabelaDespesas(tabelaDespesas)
                 msg('Despesa excluída com sucesso!', 'sucesso')
@@ -72,9 +71,11 @@ function filtraDespesas() {
 
 function testaData(dataDespesaTabela) {
     let data = new Date()
-    let [diaDataTabela, mesDataTabela, anoDataTabela] = dataDespesaTabela.split('-')
-    let dataDespesa = new Date(diaDataTabela, (mesDataTabela - 1), anoDataTabela)
-
+    console.log(data)
+    let [anoDataTabela,  mesDataTabela, diaDataTabela] = dataDespesaTabela.split('-')
+    console.log(dataDespesaTabela.split('-'))
+    let dataDespesa = new Date(anoDataTabela, (mesDataTabela - 1), diaDataTabela)
+    console.log(dataDespesa)
     return data >= dataDespesa
 }
 
