@@ -1,10 +1,10 @@
-let tabelaDespesas = []
+
 let corpoTabelaDespesas = document.querySelector('#corpoTabelaDespesas')
 let stats = ''
 let corLinha = ''
 let linkDespesas = document.querySelector('#linkDespesas')
 let listaDespesasLocalStorage = JSON.parse(localStorage.getItem('listaDespesasLocalStorage'))
-let despesas = listaDespesasLocalStorage ?? []
+let tabelaDespesas = listaDespesasLocalStorage ?? []
 let addDespesa = document.querySelector('#addDespesa')
 let botaoAdicionarDespesa = document.querySelector('#botaoAdicionarDespesa')
 let valorResumoAPagar = document.querySelector('#valorResumoAPagar')
@@ -31,7 +31,27 @@ function msg(texto, tipo) {
     setTimeout(() => {
         mensagem.innerHTML = ''
         mensagem.classList.remove(`${tipo}`)
-    }, 3000);
+    }, 3500);
+}
+
+function abreMsg(texto, tipo) {
+    mensagem.classList.add(`${tipo}`)
+    mensagem.innerHTML = texto
+    mensagem.classList.remove('esconde')
+    // setTimeout(() => {
+    //     mensagem.innerHTML = ''
+    //     mensagem.classList.remove(`${tipo}`)
+    // }, 5000);
+}
+
+function escondeMsg() {
+    mensagem.classList.add('esconde')
+    mensagem.classList.remove(`alerta`)
+    mensagem.classList.remove(`sucesso`)
+    mensagem.classList.remove(`falha`)
+    setTimeout(() => {
+        mensagem.innerHTML = ''
+    }, 200);
 }
 
 function insereOptionsCategorias() {
@@ -52,22 +72,27 @@ function contaDespesasAtrasadas(data, tipo) {
     }
 }
 
-function excluirDespesa(indice) {
-    if (confirm('Deseja realmente excluir a despesa?')) {
-        tabelaDespesas.find((obj, index) => {
-            if (indice == index) {
-                tabelaDespesas.splice(index, 1)
-                contaDespesasAtrasadas(obj.data, 'sub')
-                montarTabelaDespesas(tabelaDespesas)
-                msg('Despesa excluída com sucesso!', 'sucesso')
-            }
-        })
-    }
+function confirmaExcluirDespesa(indice) {
+    abreMsg(`Deseja realmente excluir a despesa? </br> <p><a id='linkSim' onclick='excluirDespesa("${indice}")'>SIM</a> | <a id='linkNao' onclick='escondeMsg()'>NÃO</a></p>`, 'alerta')
 }
+
+function excluirDespesa(indice) {
+    tabelaDespesas.find((obj, index) => {
+        if (indice == index) {
+            tabelaDespesas.splice(index, 1)
+            if (testaData(obj.data) && obj.status == 'PENDENTE') {
+                contaDespesasAtrasadas(obj.data, 'sub')
+            }
+            montarTabelaDespesas(tabelaDespesas)
+            msg('Despesa excluída com sucesso!', 'sucesso')
+        }
+    })
+}
+
 
 function filtraDespesas() {
     let despesasFiltradas = tabelaDespesas.filter(despesa =>
-        despesa.data.includes(filtroDespesa.value) ||
+        formataExibicaoDataDespesa(despesa.data).includes(filtroDespesa.value) ||
         despesa.nome.toLowerCase().trim().includes(filtroDespesa.value.toLowerCase().trim()) ||
         despesa.valor.includes(filtroDespesa.value) ||
         despesa.categoria.toLowerCase().trim().includes(filtroDespesa.value.toLowerCase().trim()) ||
@@ -133,7 +158,7 @@ function montarTabelaDespesas(lista) {
             <td class="${corLinha}">${formataReal(obj.valor)}</td>
             <td class="${corLinha}">${obj.categoria}</td>
             <td><input type="button" class="botao ${stats}" value="${obj.status}" onclick="trocaStatus(${index})"></td>
-            <td><input type="button" class="botao botaoCancel" value="EXCLUIR" onclick="excluirDespesa(${index})"></td>
+            <td><input type="button" class="botao botaoCancel" value="EXCLUIR" onclick="confirmaExcluirDespesa(${index})"></td>
             </tr>
             `
         })
@@ -199,8 +224,8 @@ function adicionarDespesa() {
     if (nomeDespesa.value.trim().length < 2) {
         msg('[ERRO] O nome da despesa deve conter pelo menos 2 caracteres que não podem ser espaços em branco. Altere o nome da despesa para realizar a inclusão.', 'falha')
         mostraModalDespesas()
-    } else if (valorDespesa.value.length == 0) {
-        msg('[ERRO] O valor da despesa deve ser preenchido!.', 'alerta')
+    } else if (valorDespesa.value.length == 0 || valorDespesa.value == "0,00") {
+        msg('[ERRO] O valor da despesa deve ser preenchido e não pode ser menor que R$ 0,01!', 'alerta')
         mostraModalDespesas()
     } else {
         if (categorias.find(obj => obj.nome == categoriaSelecionada.value)) {
@@ -224,25 +249,27 @@ function adicionarDespesa() {
             montarTabelaDespesas(tabelaDespesas)
             msg('Despesa incluída com sucesso!', 'sucesso')
         } else {
-            if (confirm('[ERRO] Não é possível adicionar na despesa uma categoria que não esteja cadastrada. Cadastre a categoria desejada antes de inserir a despesa. Deseja adicionar a categoria?')) {
-                mostraModalCategoria()
-                nomeCategoria.value = categoriaSelecionada.value
-            } else {
-                mostraModalDespesas()
-            }
+            mostraModalDespesas()
+            abreMsg(`[ERRO] Não é possível adicionar uma categoria que não esteja cadastrada. Deseja adicionar a categoria digitada à lista de Categorias?</br> <p><a id='linkSim' onclick='reverteParaCategoria()'>SIM</a> | <a id='linkNao' onclick='escondeMsg()'>NÃO</a></p>`, 'alerta')
         }
     }
 }
 
+function reverteParaCategoria() {
+    mostraModalCategoria()
+    nomeCategoria.value = categoriaSelecionada.value
+    escondeMsg()
+}
 
 linkDespesas.addEventListener('click', () => {
     montarTabelaDespesas(tabelaDespesas)
-    // atualizaCategoriasLocalStorage(tabelaDespesas)???
 })
+
 botaoAdicionarDespesa.addEventListener('click', () => {
     mostraModalDespesas()
     insereOptionsCategorias()
 })
+
 botaoCancelarDespesa.addEventListener('click', escondeModalDespesas)
 botaoSalvarDespesa.addEventListener('click', adicionarDespesa)
 filtroDespesa.addEventListener('keyup', filtraDespesas)
