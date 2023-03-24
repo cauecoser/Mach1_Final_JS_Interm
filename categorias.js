@@ -94,9 +94,27 @@ function atualizaCategoriasLocalStorage(lista) {
 }
 
 function filtraCategorias() {
-    let categoriasFiltradas = categorias.filter(cat => cat.nome.toLowerCase().trim().includes(filtroCategoria.value.toLowerCase().trim()))
+    let categoriasFiltradas = categorias.filter(cat => 
+        cat.nome.toLowerCase().trim().includes(filtroCategoria.value.toLowerCase().trim()) || cat.id.includes(filtroCategoria.value.trim()))
     listarCategorias(categoriasFiltradas)
 }
+
+// function doNothing() {  
+//     var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+//     if( keyCode == 13 ) {
+  
+  
+//     if(!e) var e = window.event;
+  
+//     e.cancelBubble = true;
+//     e.returnValue = false;
+  
+//     if (e.stopPropagation) {
+//       e.stopPropagation();
+//       e.preventDefault();
+//     }
+//   }
+// }
 
 function abreEdicaoCategoria(id) {
     mostraModalCategoria()
@@ -118,6 +136,7 @@ function editarCategoria(id) {
             }
         }
     })
+
 }
 
 function excluirCategoria(id) {
