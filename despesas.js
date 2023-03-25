@@ -24,6 +24,9 @@ let filtroDespesa = document.querySelector('#filtroDespesa')
 let mensagem = document.querySelector('#mensagem')
 let paragrafoMensagem = document.querySelector('#paragrafoMensagem')
 
+
+document.querySelector('form').addEventListener('submit', (event)=>{event.preventDefault()})
+
 function msg(texto, tipo) {
     mensagem.classList.add(`${tipo}`)
     mensagem.innerHTML = texto
@@ -38,10 +41,6 @@ function abreMsg(texto, tipo) {
     mensagem.classList.add(`${tipo}`)
     mensagem.innerHTML = texto
     mensagem.classList.remove('esconde')
-    // setTimeout(() => {
-    //     mensagem.innerHTML = ''
-    //     mensagem.classList.remove(`${tipo}`)
-    // }, 5000);
 }
 
 function escondeMsg() {
@@ -73,10 +72,11 @@ function contaDespesasAtrasadas(data, tipo) {
 }
 
 function confirmaExcluirDespesa(indice) {
-    abreMsg(`Deseja realmente excluir a despesa? </br> <p><a id='linkSim' onclick='excluirDespesa("${indice}")'>SIM</a> | <a id='linkNao' onclick='escondeMsg()'>NÃO</a></p>`, 'alerta')
+    abreMsg(`Deseja realmente excluir a despesa? </br> <p><a id='linkSim' onclick='excluirDespesa("${indice}")'>SIM</a> | <a id='linkNao' onclick=${'escondeMsg()'}>NÃO</a></p>`, 'alerta')
 }
 
 function excluirDespesa(indice) {
+    escondeMsg()
     tabelaDespesas.find((obj, index) => {
         if (indice == index) {
             tabelaDespesas.splice(index, 1)
@@ -164,11 +164,11 @@ function montarTabelaDespesas(lista) {
         })
     }
     atualizaDespesasLocalStorage(lista)
-
     valorResumoAtrasadas.innerHTML = totalAtrasadas
     corpoTabelaDespesas.innerHTML = linhaDespesa
     valorResumoPagas.innerHTML = Number(totalPago).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
     valorResumoAPagar.innerHTML = Number(totalAPagar).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+    contaDespesasAtrasadas(despesa.data, 'soma')
 }
 
 function atualizaDespesasLocalStorage(lista) {
