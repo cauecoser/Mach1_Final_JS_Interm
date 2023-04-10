@@ -11,6 +11,7 @@ let linkCategorias = document.querySelector('#linkCategorias')
 let cadCategorias = document.querySelector('#cadCategorias')
 let filtroCategoria = document.querySelector('#filtroCategoria')
 
+document.querySelector('form').addEventListener('submit', (event)=>{event.preventDefault()})
 
 function defineID() {
     let data = new Date()

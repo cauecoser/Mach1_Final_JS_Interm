@@ -24,7 +24,6 @@ let filtroDespesa = document.querySelector('#filtroDespesa')
 let mensagem = document.querySelector('#mensagem')
 let paragrafoMensagem = document.querySelector('#paragrafoMensagem')
 
-
 document.querySelector('form').addEventListener('submit', (event)=>{event.preventDefault()})
 
 function msg(texto, tipo) {
@@ -152,14 +151,14 @@ function montarTabelaDespesas(lista) {
             }
 
             linhaDespesa += `
-            <tr>
-            <td class="${corLinha}">${formataExibicaoDataDespesa(obj.data)}</td>
-            <td class="${corLinha}">${obj.nome}</td>
-            <td class="${corLinha}">${formataReal(obj.valor)}</td>
-            <td class="${corLinha}">${obj.categoria}</td>
-            <td><input type="button" class="botao ${stats}" value="${obj.status}" onclick="trocaStatus(${index})"></td>
-            <td><input type="button" class="botao botaoCancel" value="EXCLUIR" onclick="confirmaExcluirDespesa(${index})"></td>
-            </tr>
+                <tr>
+                    <td class="${corLinha}">${formataExibicaoDataDespesa(obj.data)}</td>
+                    <td class="${corLinha}">${obj.nome}</td>
+                    <td class="${corLinha}">${formataReal(obj.valor)}</td>
+                    <td class="${corLinha}">${obj.categoria}</td>
+                    <td><input type="button" class="botao ${stats}" value="${obj.status}" onclick="trocaStatus(${index})"></td>
+                    <td><input type="button" class="botao botaoCancel" value="EXCLUIR" onclick="confirmaExcluirDespesa(${index})"></td>
+                </tr>
             `
         })
     }
@@ -168,7 +167,7 @@ function montarTabelaDespesas(lista) {
     corpoTabelaDespesas.innerHTML = linhaDespesa
     valorResumoPagas.innerHTML = Number(totalPago).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
     valorResumoAPagar.innerHTML = Number(totalAPagar).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-    contaDespesasAtrasadas(despesa.data, 'soma')
+    contaDespesasAtrasadas(dataVencimentoDespesa, 'conta')
 }
 
 function atualizaDespesasLocalStorage(lista) {

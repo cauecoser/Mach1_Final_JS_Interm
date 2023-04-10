@@ -39,6 +39,7 @@ a:link {
 
 a:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 #navBar {
@@ -283,6 +284,10 @@ legend {
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
+}
+
+input[type=button]:hover {
+    cursor: pointer;
 }
 
 .esconde {
